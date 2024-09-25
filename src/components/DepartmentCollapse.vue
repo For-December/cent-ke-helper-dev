@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import {computed, onMounted, ref, watch} from "vue";
-import KingArea from "./KingArea.vue";
-import CourseCard from "./CourseCard.vue";
+import {computed, ref, watch} from "vue";
+import KingArea from "@/components/KingArea.vue";
+import CourseCard from "@/components/CourseCard.vue";
 import {hasTeachInfo, isApiError, teachInfosCacheKey, validData} from "@/api/globalConst";
 import {teachInfos} from "@/store/globalData.ts";
 import {webGetTeachInfos} from "../api/req";

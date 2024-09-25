@@ -2,8 +2,8 @@ import {ref} from "vue";
 
 export const baseURL =
     // window.location.origin;
-'http://localhost:80'
-// 'https://cengkehelper.top';
+// 'http://localhost:80'
+'https://cengkehelper.top';
 
 export const isApiError = ref(false)
 export const hasTeachInfo = ref(new Map<string,boolean>())
