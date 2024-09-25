@@ -4,9 +4,7 @@
       <n-icon><CashIcon /></n-icon>
     </template>
     <template #arrow>
-      <n-icon>
-        <CashIcon />
-      </n-icon>
+      <n-icon><CashIcon /></n-icon>
     </template>
     <n-collapse-item title="青铜" name="1">
       <div>可以</div>
