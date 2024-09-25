@@ -1,11 +1,8 @@
 <script setup lang="ts">
 
-import {computed, PropType, ref} from "vue";
+import {PropType, ref} from "vue";
 import {Items} from "@/types/Items";
 
-
-//defineProps(['infoCardColor','building','department'])
-// const infoCardColor = ref('#A2D2FF')
 const {infoCardColor, teachInfo} =
     defineProps({
       infoCardColor: String,

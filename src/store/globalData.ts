@@ -4,3 +4,5 @@ import {Items} from "@/types/Items";
 
 export const teachInfos =
     ref(new Map<string, Map<string, Items.TeachInfo[]>>())
+
+export const isNewPage = ref(false)

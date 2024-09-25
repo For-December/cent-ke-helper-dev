@@ -22,17 +22,10 @@ const departments = ref([
 
 '#c48833'
 
-// 配色方案
-// const collapseHeaderBgColor = ref(['bg-[#CDB4DB] rounded-l-[2vw]', 'bg-[#d6ccc2] rounded-l-[2vw]', 'bg-[#77A1B8] rounded-l-[2vw]',
-//   'bg-[#344e41]/70 rounded-l-[2vw]', 'bg-[#d5d8dc] rounded-l-[2vw]']) // #dee2e6
-
 const collapseHeaderBgColor = ref(
     'bg-[#dda15e]'
 ) // #dee2e6
 
-
-// const collapseKingBgColor = ref(['bg-[#FFC8DD]/50', 'bg-[#f5ebe0]/70',
-//   'bg-[#dbfaff]/25', 'bg-[#a3b18a]/70', 'bg-[#f8f9fa]'])
 const collapseKingBgColor = ref(
     'bg-[#fefae0]'
 )

@@ -1,6 +1,6 @@
 <script setup>
 
-import {onMounted, ref, watch} from "vue";
+import {onMounted, ref} from "vue";
 
 const departments = ref([
   "文理学部",

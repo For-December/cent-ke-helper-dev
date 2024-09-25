@@ -41,23 +41,10 @@ const iconLib = ref([
 
 const curScrollIndex = ref(0)
 const handleScroll = (e) => {
-  // console.log(e.target);
-  // console.log(parseInt(e.target.scrollLeft));
 
-  // console.log(e.target.scrollWidth-e.target.offsetWidth);
-  // 进度条过半
-  // if (parseInt(e.target.scrollLeft) > e.target.offsetWidth / 2) {
-  //   curScrollIndex.value = 1
-  // } else {
-  //   curScrollIndex.value = 0
-  // }
-
-  // console.log(e.target.scrollLeft)
-  // const totalScrollLen = e.target.scrollWidth-e.target.offsetWidth
   for (let i = 0; i < pageSize.value; i++) {
     if (parseInt(e.target.scrollLeft) <=
         e.target.scrollWidth / pageSize.value * (i + 1) - e.target.offsetWidth / 2) {
-      // e.target.scrollLeft = e.target.scrollWidth * i / pageSize.value
       curScrollIndex.value = i
       return
     }
@@ -70,30 +57,14 @@ const handleScroll = (e) => {
 
 const scrollContent = ref()
 const onClickProcess = (index: number) => {
-  // console.log(num);
-  // console.log(pageSize.value);
-
-  // console.log(totalScrollLen);
   scrollContent.value.scrollLeft = scrollContent.value.scrollWidth * index / pageSize.value
 
 }
 
-// const curScrollIndex = computed(()=>{
-//     for (let i = 0; i < pageSize.value; i++) {
-//     if (parseInt(scrollContent.value.scrollLeft) <=
-//         scrollContent.value.scrollWidth / pageSize.value * (i + 1) - scrollContent.value.offsetWidth / 2) {
-//       scrollContent.value.scrollLeft = scrollContent.value.scrollWidth * i / pageSize.value
-//       console.log(i);
-//       return i
-//     }
-//   }
-//     return 0
-// })
 
 
 const partOfBuildings = (n: number): string[] => {
   const len = buildings.value.length
-  // console.log(len/2);
   return buildings.value.slice(5 * n, Math.min(len, 5 * (n + 1)))
 }
 
@@ -112,10 +83,6 @@ const onClickIcon = (index: number) => {
   <div class="relative rounded-xl overflow-auto pb-[2vw] opacity-100">
     <div class="relative w-full flex gap-0 snap-x snap-mandatory overflow-x-auto scroll-smooth" ref="scrollContent"
          @scroll="handleScroll">
-      <!--      <div class="snap-center shrink-0">-->
-      <!--        <div class="shrink-0 w-4 sm:w-48"></div>-->
-      <!--      </div>-->
-      <!--      snap-always snap-center-->
       <div class="snap-always snap-center shrink-0 first:pl-0 last:pr-0"
            v-for="i in pageSize">
 
@@ -133,9 +100,6 @@ const onClickIcon = (index: number) => {
           </div>
         </div>
       </div>
-      <!--      <div class="snap-center shrink-0">-->
-      <!--        <div class="shrink-0 w-4 sm:w-48"></div>-->
-      <!--      </div>-->
     </div>
   </div>
 

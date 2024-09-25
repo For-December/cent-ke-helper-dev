@@ -9,6 +9,8 @@ declare module 'vue' {
   export interface GlobalComponents {
     CourseCard: typeof import('./src/components/CourseCard.vue')['default']
     DepartmentCollapse: typeof import('./src/components/DepartmentCollapse.vue')['default']
+    ElCollapse: typeof import('element-plus/es')['ElCollapse']
+    ElCollapseItem: typeof import('element-plus/es')['ElCollapseItem']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     KingArea: typeof import('./src/components/KingArea.vue')['default']
     Menu: typeof import('./src/components/Menu.vue')['default']
@@ -17,5 +19,7 @@ declare module 'vue' {
     NCollapseItem: typeof import('naive-ui')['NCollapseItem']
     NIcon: typeof import('naive-ui')['NIcon']
     NVirtualList: typeof import('naive-ui')['NVirtualList']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
   }
 }
