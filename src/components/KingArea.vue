@@ -4,27 +4,25 @@ import {computed, onMounted, ref} from "vue";
 
 
 
-// const {buildingIconColor} =defineProps(['buildingIconColor']); // ref("#FFAFCC")
-const {buildingIconColor, choseBoxColor, department, allBuildings} =
+const {department, allBuildings} =
     defineProps({
-      buildingIconColor: String,
-      choseBoxColor: String,
       department: String,
       allBuildings: Array
     })
 
 
+const buildingIconColor = '#606c38'
 
-// ref("rgb(255,69,137,0.1)")
-onMounted(() => {
+const choseBoxColor ='rgb(255,69,137,0.1)'
 
-})
+
 
 const buildings = ref([])
+onMounted(() => {
+  buildings.value = allBuildings
+})
 
-// console.log(allBuildings)
-buildings.value = allBuildings
-// emits('getCurBuildingWithDepartment', buildings.value[0], department)
+// buildings.value = allBuildings
 
 const pageSize = computed(() => {
   return parseInt(String(Math.ceil(buildings.value.length / 5))) // 向上整数

@@ -31,12 +31,12 @@ const collapseKingBgColor = ref(
 )
 
 
-const collapseBuildingIconColor = ref(
-    '#606c38'
-)
-const collapseChoseBoxColor = ref(
-    'rgb(255,69,137,0.1)'
-)
+// const collapseBuildingIconColor = ref(
+//     '#606c38'
+// )
+// const collapseChoseBoxColor = ref(
+//     'rgb(255,69,137,0.1)'
+// )
 const collapseContentBgColor = ref(
     'bg-[#dda15e]/50'
 ) // adb5bd
@@ -265,8 +265,8 @@ watch(validData, (newValue) => {
             <div> <!-- 被折叠的内容容器-->
 
               <div :class="collapseKingBgColor" v-if="curBuildings(department).length>0">
-                <KingArea :building-icon-color="collapseBuildingIconColor"
-                          :chose-box-color="collapseChoseBoxColor"
+                <!--                          :chose-box-color="collapseChoseBoxColor"-->
+                <KingArea
                           :department="department"
                           @get-cur-building-with-department="getCurBuildingWithDepartment"
                           :all-buildings="curBuildings(department)"
