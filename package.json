@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/node": "^22.7.0",
     "@vicons/ionicons5": "^0.12.0",
+    "axios": "^1.7.7",
     "preline": "^2.5.0",
     "vue": "^3.4.37"
   },
