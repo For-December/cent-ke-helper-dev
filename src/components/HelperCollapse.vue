@@ -25,7 +25,6 @@
         />
 
 
-
       </el-collapse-item>
       <el-collapse-item name="2">
         <template #title>
@@ -98,7 +97,7 @@ import CourseList from "@/components/CourseList.vue";
 import {ref} from "vue";
 
 const activeName = ref('1')
-const curBuildings = ref(['','','','',''])
+const curBuildings = ref(['', '', '', '', ''])
 // const changeCurBuilding = (building:string)=>{
 //   console.log(building)
 //   curBuilding.value = building
@@ -110,6 +109,10 @@ const curBuildings = ref(['','','','',''])
   background: #dda15e;
   border: #bc6c25 0.5vw solid;
   margin-bottom: 1vw;
+}
+
+:deep(.el-collapse-item .el-collapse-item__content) {
+  padding-bottom: 0;
 }
 
 </style>
