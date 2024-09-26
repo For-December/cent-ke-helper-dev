@@ -2,9 +2,9 @@
 
 import {isApiError} from "@/api/globalConst.ts";
 import CourseCard from "@/components/CourseCard.vue";
-import {computed, onMounted, ref} from "vue";
-import {Items} from "@/types/Items";
-import {globalDepartments, GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
+import {computed, onMounted} from "vue";
+import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
+
 const emits = defineProps(['curDepartment','curBuilding'])
 
 const hasInfo = computed(()=>{

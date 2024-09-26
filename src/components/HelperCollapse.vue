@@ -2,7 +2,7 @@
 
   <!--  折叠面板部分-->
   <div class="demo-collapse">
-    <el-collapse accordion>
+    <el-collapse v-model="activeName" accordion>
       <el-collapse-item name="1">
         <template #title>
           <span class="ml-2">
@@ -13,12 +13,12 @@
 
         <KingArea
             :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0))"
-            v-model="curBuilding"
+            v-model="curBuildings[0]"
         />
 
         <CourseList
             :cur-department="globalDepartments.at(0)"
-            :cur-building="curBuilding"
+            :cur-building="curBuildings[0]"
         />
 
 
@@ -33,7 +33,15 @@
         </template>
         <KingArea
             :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(1))"
+            v-model="curBuildings[1]"
+
         />
+
+        <CourseList
+            :cur-department="globalDepartments.at(1)"
+            :cur-building="curBuildings[1]"
+        />
+
 
       </el-collapse-item>
       <el-collapse-item name="3">
@@ -45,7 +53,15 @@
         </template>
         <KingArea
             :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(2))"
+            v-model="curBuildings[2]"
+
         />
+
+        <CourseList
+            :cur-department="globalDepartments.at(2)"
+            :cur-building="curBuildings[2]"
+        />
+
 
       </el-collapse-item>
       <el-collapse-item name="4">
@@ -57,7 +73,14 @@
         </template>
         <KingArea
             :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(3))"
+            v-model="curBuildings[3]"
         />
+        <CourseList
+            :cur-department="globalDepartments.at(3)"
+            :cur-building="curBuildings[3]"
+        />
+
+
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -71,8 +94,9 @@ import {globalDepartments, GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
 import CourseList from "@/components/CourseList.vue";
 import {ref} from "vue";
 
+const activeName = ref('1')
 GlobalTeachInfosObj.loadGlobalTeachInfos()
-const curBuilding = ref('')
+const curBuildings = ref(['','','','',''])
 // const changeCurBuilding = (building:string)=>{
 //   console.log(building)
 //   curBuilding.value = building
