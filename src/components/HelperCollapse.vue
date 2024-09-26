@@ -11,10 +11,13 @@
           <span class="ml-1">文理学部</span>
         </template>
 
-        <KingArea
-            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0))"
-            v-model="curBuildings[0]"
-        />
+        <div class="bg-[#fefae0]">
+          <KingArea
+              v-if="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)).length>0"
+              :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0))"
+              v-model="curBuildings[0]"
+          />
+        </div>
 
         <CourseList
             :cur-department="globalDepartments.at(0)"
