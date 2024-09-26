@@ -8,6 +8,6 @@ export const baseURL =
 export const isApiError = ref(false)
 
 
-export const teachInfosCacheKey = "teachInfosCache"
-export const curTimeCacheKey = "curTimeCache"
+export const teachInfosCacheKey = "TEACH_INFO_CACHE"
+export const curTimeCacheKey = "CUR_TIME_CACHE"
 
