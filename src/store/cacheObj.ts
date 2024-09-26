@@ -1,8 +1,8 @@
 import {computed, Ref, ref} from "vue";
-import {Items} from "@/types/Items";
-import {webGetCurTime, webGetTeachInfos} from "@/api/req.ts";
-import {adjustCacheKey, curTimeCacheKey, isAdjust, teachInfosCacheKey, validData} from "@/api/globalConst.ts";
+import {webGetCurTime} from "@/api/req.ts";
+import {curTimeCacheKey, teachInfosCacheKey} from "@/api/globalConst.ts";
 import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
+import {validData} from "@/store/globalData.ts";
 
 
 export const GlobalCacheObj = (() => {
@@ -51,9 +51,6 @@ export const GlobalCacheObj = (() => {
             .then((data) => {
                 weekday.value = weekdayMap[data.weekday];
                 lessonNum.value = data.lessonNum;
-                if (isAdjust.value != data.isAdjust) {
-                    isAdjust.value = data.isAdjust;
-                }
                 if (!data.valid) {
                     setInterval(() => {
                         location.reload();

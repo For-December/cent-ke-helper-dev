@@ -21,13 +21,18 @@ onMounted(()=>{
   console.log(hasInfo.value)
 })
 
+const isApiSomeErr = computed(()=>{
+  return GlobalTeachInfosObj.apiErrorMsg.value!==''
+})
+
 
 </script>
 
 <template>
   <div class="bg-[#dda15e]/50 pt-[2vw]">
-    <div v-if="isApiError">
+    <div v-if="isApiSomeErr">
       网络异常，请通过正确的域名访问~
+      {{GlobalTeachInfosObj.apiErrorMsg}}
     </div>
     <div v-else-if="!hasInfo">
 

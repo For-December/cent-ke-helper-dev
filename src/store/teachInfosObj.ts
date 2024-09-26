@@ -106,5 +106,6 @@ export const GlobalTeachInfosObj = (() => {
         getBuildings,
         loadGlobalTeachInfos,
         getTeachInfos,
+        apiErrorMsg
     };
 })();
