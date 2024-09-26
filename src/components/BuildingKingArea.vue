@@ -1,10 +1,9 @@
 <script setup lang="ts">
 
-import HelperCollapse from "@/components/HelperCollapse.vue";
 </script>
 
 <template>
-  <HelperCollapse/>
+
 </template>
 
 <style scoped>

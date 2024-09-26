@@ -12,6 +12,13 @@ import path from 'path';
 const pathSrc = path.resolve(__dirname, "src");
 // https://vitejs.dev/config/
 export default defineConfig({
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: "modern-compiler" // or 'modern'
+            }
+        }
+    },
     plugins: [
         vue(),
         AutoImport({
@@ -32,6 +39,7 @@ export default defineConfig({
             resolvers: [ElementPlusResolver(), NaiveUiResolver()],
         }),
         ElementPlus({}),
+
     ],
     resolve: {
         alias: {

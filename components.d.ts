@@ -7,11 +7,13 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BuildingKingArea: typeof import('./src/components/BuildingKingArea.vue')['default']
     CourseCard: typeof import('./src/components/CourseCard.vue')['default']
     DepartmentCollapse: typeof import('./src/components/DepartmentCollapse.vue')['default']
     ElCollapse: typeof import('element-plus/es')['ElCollapse']
     ElCollapseItem: typeof import('element-plus/es')['ElCollapseItem']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    HelperCollapse: typeof import('./src/components/HelperCollapse.vue')['default']
     KingArea: typeof import('./src/components/KingArea.vue')['default']
     Menu: typeof import('./src/components/Menu.vue')['default']
     NButton: typeof import('naive-ui')['NButton']

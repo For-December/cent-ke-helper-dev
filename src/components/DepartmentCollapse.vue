@@ -4,7 +4,7 @@ import {computed, ref, watch} from "vue";
 import KingArea from "@/components/KingArea.vue";
 import CourseCard from "@/components/CourseCard.vue";
 import {hasTeachInfo, isApiError, teachInfosCacheKey, validData} from "@/api/globalConst";
-import {teachInfos} from "@/store/globalData.ts";
+import {globalTeachInfos} from "@/store/globalData.ts";
 import {webGetTeachInfos} from "../api/req";
 import {Items} from "@/types/Items";
 
@@ -40,10 +40,7 @@ const collapseKingBgColor = ref(
 const collapseContentBgColor = ref(
     'bg-[#dda15e]/50'
 ) // adb5bd
-const infoCardColor = ref(
-    // '#606c38'
-    'rgba(96,108,56,0.5)'
-)
+
 '#dbfaff'
 
 
@@ -69,7 +66,7 @@ const curBuildings = computed(() => {
 
 const getBuildings = () => {
   for (const department of departments.value) {
-    for (let building of teachInfos.value.get(department).keys()) {
+    for (let building of globalTeachInfos.value.get(department).keys()) {
       buildingsMap.value.get(department).push(building)
     }
 
@@ -107,7 +104,7 @@ const initTeachInfos = (data: Items.BuildingTeachInfos[][]) => {
     data[i].forEach(t => {
       tempMap.set(t.building, t.infos)
     })
-    teachInfos.value.set(departments.value[i], tempMap)
+    globalTeachInfos.value.set(departments.value[i], tempMap)
   }
   getBuildings()
 }
@@ -267,7 +264,6 @@ watch(validData, (newValue) => {
               <div :class="collapseKingBgColor" v-if="curBuildings(department).length>0">
                 <!--                          :chose-box-color="collapseChoseBoxColor"-->
                 <KingArea
-                          :department="department"
                           @get-cur-building-with-department="getCurBuildingWithDepartment"
                           :all-buildings="curBuildings(department)"
                 ></KingArea>
@@ -293,10 +289,8 @@ watch(validData, (newValue) => {
                 <div v-else>
                   <div>
                     <div class="mt-[3vw] pb-[1vw]"
-                         v-for="teachInfo in teachInfos.get(department).get(curBuildingDepartmentMap.get(department))">
-                      <CourseCard :info-card-color="infoCardColor"
-                                  :teach-info="teachInfo">
-                      </CourseCard>
+                         v-for="teachInfo in globalTeachInfos.get(department).get(curBuildingDepartmentMap.get(department))">
+                      <CourseCard :teach-info="teachInfo"/>
                     </div>
                   </div>
                   <!---->

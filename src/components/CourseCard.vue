@@ -3,9 +3,12 @@
 import {PropType, ref} from "vue";
 import {Items} from "@/types/Items";
 
-const {infoCardColor, teachInfo} =
+const infoCardColor = ref(
+    // '#606c38'
+    'rgba(96,108,56,0.5)'
+)
+const {teachInfo} =
     defineProps({
-      infoCardColor: String,
       teachInfo: Object as PropType<Items.TeachInfo>,
     })
 

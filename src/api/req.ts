@@ -1,4 +1,4 @@
-import {Items} from "../types/Items";
+import {Items} from "@/types/Items";
 import {request} from "./myAxois.ts";
 
 export const webGetTeachInfos = ()

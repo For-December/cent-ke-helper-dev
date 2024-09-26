@@ -11,16 +11,12 @@ export declare module Items {
         courseType: string;
     }
 
-    export interface RespBuildings {
-        buildings: string[];
-    }
-
     export interface ReqCurTime {
-        weekNum:number;
+        weekNum: number;
         weekday: number;
         lessonNum: number;
         valid: boolean;
-        isAdjust:boolean;
+        isAdjust: boolean;
     }
 
     export interface BuildingTeachInfos {
