@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     BuildingKingArea: typeof import('./src/components/BuildingKingArea.vue')['default']
     CourseCard: typeof import('./src/components/CourseCard.vue')['default']
+    CourseList: typeof import('./src/components/CourseList.vue')['default']
     DepartmentCollapse: typeof import('./src/components/DepartmentCollapse.vue')['default']
     ElCollapse: typeof import('element-plus/es')['ElCollapse']
     ElCollapseItem: typeof import('element-plus/es')['ElCollapseItem']

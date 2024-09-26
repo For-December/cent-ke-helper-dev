@@ -22,10 +22,13 @@ const {allBuildings} =
       allBuildings: Array
     })
 
+const curBuilding = defineModel()
+
 const buildings = ref([])
 onMounted(() => {
   buildings.value = allBuildings
 })
+
 
 const pageSize = computed(() => {
   return parseInt(String(Math.ceil(buildings.value.length / 5))) // 向上整数
@@ -57,12 +60,14 @@ const partOfBuildings = (n: number): string[] => {
 }
 
 // 返回当前是哪个教学楼，便于展示数据（每次点击图标触发）
-const emits = defineEmits(['clickIcon']);
+// const emits = defineEmits(['clickIcon']);
 
 const buildingIndex = ref(0)
 const onClickIcon = (index: number) => {
-  emits('clickIcon', buildings.value[index])
+  // emits('clickIcon', buildings.value[index])
+  console.log(curBuilding.value)
   buildingIndex.value = index
+  curBuilding.value  = buildings.value[index]
 }
 
 

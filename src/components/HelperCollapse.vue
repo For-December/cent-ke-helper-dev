@@ -13,8 +13,15 @@
 
         <KingArea
             :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0))"
-            @click-icon="changeCurBuilding"
+            v-model="curBuilding"
         />
+
+        <CourseList
+            :cur-department="globalDepartments.at(0)"
+            :cur-building="curBuilding"
+        />
+
+
 
       </el-collapse-item>
       <el-collapse-item name="2">
@@ -26,7 +33,6 @@
         </template>
         <KingArea
             :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(1))"
-            @click-icon="changeCurBuilding"
         />
 
       </el-collapse-item>
@@ -39,7 +45,6 @@
         </template>
         <KingArea
             :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(2))"
-            @click-icon="changeCurBuilding"
         />
 
       </el-collapse-item>
@@ -52,7 +57,6 @@
         </template>
         <KingArea
             :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(3))"
-            @click-icon="changeCurBuilding"
         />
       </el-collapse-item>
     </el-collapse>
@@ -64,11 +68,15 @@
 import KingArea from "@/components/KingArea.vue";
 
 import {globalDepartments, GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
+import CourseList from "@/components/CourseList.vue";
+import {ref} from "vue";
 
 GlobalTeachInfosObj.loadGlobalTeachInfos()
-const changeCurBuilding = (building:string)=>{
-  console.log(building)
-}
+const curBuilding = ref('')
+// const changeCurBuilding = (building:string)=>{
+//   console.log(building)
+//   curBuilding.value = building
+// }
 </script>
 
 <style scoped lang="scss">

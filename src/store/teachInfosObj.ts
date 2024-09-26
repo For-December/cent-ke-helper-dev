@@ -29,6 +29,25 @@ export const GlobalTeachInfosObj = (() => {
 
     const apiErrorMsg = ref<string>('')
 
+
+    function getTeachInfos(department: string, building: string): Items.TeachInfo[] {
+        if (!teachInfos.value.get(department)) {
+            return []
+        }
+
+        if (building === '') {
+            return teachInfos.value
+                .get(department)
+                .get(departmentBuildingMap.value.get(
+                    department
+                ).at(0))
+        }
+
+
+        return teachInfos.value.get(department).get(building)
+    }
+
+
     function loadGlobalTeachInfos() {
         webGetTeachInfos()
             .then((data) => {
@@ -74,8 +93,8 @@ export const GlobalTeachInfosObj = (() => {
     }
 
     return {
-        teachInfos,
         getBuildings,
         loadGlobalTeachInfos,
+        getTeachInfos,
     };
 })();
