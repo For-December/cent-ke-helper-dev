@@ -48,7 +48,17 @@ export const GlobalTeachInfosObj = (() => {
     }
 
 
-    function loadGlobalTeachInfos() {
+    function loadGlobalTeachInfos(cacheable: boolean) {
+
+        if (cacheable) {
+            let data = localStorage.getItem(teachInfosCacheKey)
+            if (data != null && data != '') {
+                initData(JSON.parse(data))
+                return
+            }
+        }
+
+
         webGetTeachInfos()
             .then((data) => {
                 apiErrorMsg.value = ''

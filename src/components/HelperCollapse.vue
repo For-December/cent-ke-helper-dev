@@ -98,7 +98,6 @@ import CourseList from "@/components/CourseList.vue";
 import {ref} from "vue";
 
 const activeName = ref('1')
-GlobalTeachInfosObj.loadGlobalTeachInfos()
 const curBuildings = ref(['','','','',''])
 // const changeCurBuilding = (building:string)=>{
 //   console.log(building)
