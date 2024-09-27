@@ -8,14 +8,16 @@ import HelperPage from "@/view/HelperPage.vue";
     <n-layout has-sider>
       <n-layout-sider
           collapse-mode="transform"
-          :collapsed-width="120"
+          :collapsed-width="50"
           :width="400"
           :show-collapsed-content="false"
           show-trigger="arrow-circle"
-          content-style="padding: 24px;"
+          content-style="padding-right: 10px;"
           bordered
       >
-        <HelperPage/>
+        <el-scrollbar height="90vh" :noresize="true">
+          <HelperPage/>
+        </el-scrollbar>
       </n-layout-sider>
       <n-layout-content content-style="padding: 24px;">
         平山道

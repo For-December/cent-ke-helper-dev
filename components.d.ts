@@ -13,6 +13,7 @@ declare module 'vue' {
     DepartmentCollapse: typeof import('./src/components/DepartmentCollapse.vue')['default']
     ElCollapse: typeof import('element-plus/es')['ElCollapse']
     ElCollapseItem: typeof import('element-plus/es')['ElCollapseItem']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     HelperCollapse: typeof import('./src/components/HelperCollapse.vue')['default']
     KingArea: typeof import('./src/components/KingArea.vue')['default']
