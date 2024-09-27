@@ -89,10 +89,10 @@
 
 <script setup lang="ts">
 
-import KingArea from "@/components/KingArea.vue";
+import KingArea from "@/components/helper/KingArea.vue";
 
 import {globalDepartments, GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
-import CourseList from "@/components/CourseList.vue";
+import CourseList from "@/components/helper/CourseList.vue";
 import {ref} from "vue";
 
 const activeName = ref('1')

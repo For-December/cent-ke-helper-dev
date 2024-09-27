@@ -9,16 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "@types/node": "^22.7.0",
     "@vicons/ionicons5": "^0.12.0",
     "axios": "^1.7.7",
     "bootstrap-icons": "^1.11.3",
     "element-plus": "^2.8.3",
     "preline": "^2.5.0",
+    "vant": "^4.9.7",
     "vue": "^3.4.37",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
+    "@vant/auto-import-resolver": "^1.2.1",
     "@vitejs/plugin-vue": "^5.1.2",
     "autoprefixer": "^10.4.20",
     "naive-ui": "^2.39.0",

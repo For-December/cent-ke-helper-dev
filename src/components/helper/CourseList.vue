@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import CourseCard from "@/components/CourseCard.vue";
+import CourseCard from "@/components/helper/CourseCard.vue";
 import {computed, onMounted} from "vue";
 import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
 

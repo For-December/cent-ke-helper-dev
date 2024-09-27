@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@element-plus/icons-vue':
+        specifier: ^2.3.1
+        version: 2.3.1(vue@3.5.8(typescript@5.6.2))
       '@types/node':
         specifier: ^22.7.0
         version: 22.7.0
@@ -26,6 +29,9 @@ importers:
       preline:
         specifier: ^2.5.0
         version: 2.5.0
+      vant:
+        specifier: ^4.9.7
+        version: 4.9.7(vue@3.5.8(typescript@5.6.2))
       vue:
         specifier: ^3.4.37
         version: 3.5.8(typescript@5.6.2)
@@ -33,6 +39,9 @@ importers:
         specifier: ^4.4.5
         version: 4.4.5(vue@3.5.8(typescript@5.6.2))
     devDependencies:
+      '@vant/auto-import-resolver':
+        specifier: ^1.2.1
+        version: 1.2.1
       '@vitejs/plugin-vue':
         specifier: ^5.1.2
         version: 5.1.4(vite@5.4.7(@types/node@22.7.0)(sass@1.79.3))(vue@3.5.8(typescript@5.6.2))
@@ -428,6 +437,17 @@ packages:
 
   '@types/web-bluetooth@0.0.16':
     resolution: {integrity: sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==}
+
+  '@vant/auto-import-resolver@1.2.1':
+    resolution: {integrity: sha512-czGWW4UolNITkF3qQSQlpHDHAsI3/GHVKbRMmEEpry7NWdnU4p5a5jBi0VApbaLa5g80Hy10XVs3IB+UozoSUw==}
+
+  '@vant/popperjs@1.3.0':
+    resolution: {integrity: sha512-hB+czUG+aHtjhaEmCJDuXOep0YTZjdlRR+4MSmIFnkCQIxJaXLQdSsR90XWvAI2yvKUI7TCGqR8pQg2RtvkMHw==}
+
+  '@vant/use@1.6.0':
+    resolution: {integrity: sha512-PHHxeAASgiOpSmMjceweIrv2AxDZIkWXyaczksMoWvKV2YAYEhoizRuk/xFnKF+emUIi46TsQ+rvlm/t2BBCfA==}
+    peerDependencies:
+      vue: ^3.0.0
 
   '@vicons/ionicons5@0.12.0':
     resolution: {integrity: sha512-Iy1EUVRpX0WWxeu1VIReR1zsZLMc4fqpt223czR+Rpnrwu7pt46nbnC2ycO7ItI/uqDLJxnbcMC7FujKs9IfFA==}
@@ -1187,6 +1207,11 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
+  vant@4.9.7:
+    resolution: {integrity: sha512-bFkjF6zZf8l6WxPwDn6vd2PZISpUhm4u3fBJStUh+BDll7yaAv610j56DDYoL3HM8tws9nanGN4WBbTrKToMrA==}
+    peerDependencies:
+      vue: ^3.0.0
+
   vdirs@0.1.8:
     resolution: {integrity: sha512-H9V1zGRLQZg9b+GdMk8MXDN2Lva0zx72MPahDKc30v+DtwKjfyOSXWRIX4t2mhDubM1H09gPhWeth/BJWPHGUw==}
     peerDependencies:
@@ -1528,6 +1553,14 @@ snapshots:
       undici-types: 6.19.8
 
   '@types/web-bluetooth@0.0.16': {}
+
+  '@vant/auto-import-resolver@1.2.1': {}
+
+  '@vant/popperjs@1.3.0': {}
+
+  '@vant/use@1.6.0(vue@3.5.8(typescript@5.6.2))':
+    dependencies:
+      vue: 3.5.8(typescript@5.6.2)
 
   '@vicons/ionicons5@0.12.0': {}
 
@@ -2360,6 +2393,13 @@ snapshots:
       picocolors: 1.1.0
 
   util-deprecate@1.0.2: {}
+
+  vant@4.9.7(vue@3.5.8(typescript@5.6.2)):
+    dependencies:
+      '@vant/popperjs': 1.3.0
+      '@vant/use': 1.6.0(vue@3.5.8(typescript@5.6.2))
+      '@vue/shared': 3.5.8
+      vue: 3.5.8(typescript@5.6.2)
 
   vdirs@0.1.8(vue@3.5.8(typescript@5.6.2)):
     dependencies:

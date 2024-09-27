@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import HelperCollapse from "@/components/HelperCollapse.vue";
+import HelperCollapse from "@/components/helper/HelperCollapse.vue";
 import {watch} from "vue";
 import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
 import {GlobalCacheObj} from "../store/cacheObj.ts";

@@ -8,8 +8,8 @@ export const routes:Array<RouteRecordRaw> = [
         meta: {hidden: true}
     },
     {
-        path: '/list',
-        component: () => import('@/view/pc/ListHome.vue'),
+        path: '/tree-hole',
+        component: () => import('@/view/TreeHole.vue'),
         meta: {hidden: true}
     }
 ]
