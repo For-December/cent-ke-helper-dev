@@ -26,7 +26,7 @@ const curBuilding = defineModel()
 
 const buildings = ref<string[]>([])
 onMounted(() => {
-  buildings.value = allBuildings||[]
+  buildings.value = allBuildings || []
 })
 
 
@@ -36,7 +36,7 @@ const pageSize = computed(() => {
 
 // 动作
 const curScrollIndex = ref(0)
-const handleScroll = (e:any) => {
+const handleScroll = (e: any) => {
   for (let i = 0; i < pageSize.value; i++) {
     if (parseInt(e.target.scrollLeft) <=
         e.target.scrollWidth / pageSize.value * (i + 1) - e.target.offsetWidth / 2) {
@@ -67,35 +67,35 @@ const onClickIcon = (index: number) => {
   // emits('clickIcon', buildings.value[index])
   console.log(curBuilding.value)
   buildingIndex.value = index
-  curBuilding.value  = buildings.value[index]
+  curBuilding.value = buildings.value[index]
 }
 
 
 </script>
 
 <template>
-  <div class="relative rounded-xl overflow-auto pb-2 opacity-100">
+  <div class="relative rounded-xl overflow-auto pb-2 opacity-100" v-if="buildings.length>0">
     <div class="relative w-full flex gap-0 snap-x snap-mandatory overflow-x-auto scroll-smooth"
          ref="scrollContent"
          @scroll="handleScroll">
       <div class="snap-always snap-center shrink-0 first:pl-0 last:pr-0 w-[100%]"
            v-for="i in pageSize">
 
-          <div class="grid grid-cols-5 pt-5 pb-5  border-l-0.5 border-r-0.5">
-            <div v-for="(building,index) in partOfBuildings(i-1)" class="text-center transition-all">
-              <div :style="{
+        <div class="grid grid-cols-5 pt-5 pb-5  border-l-0.5 border-r-0.5">
+          <div v-for="(building,index) in partOfBuildings(i-1)" class="text-center transition-all">
+            <div :style="{
               'border-color': (i-1)*5+index===buildingIndex?buildingIconColor:'rgba(255, 255, 255, 0.0)',
             'border-width':'2.5px',
             'border-radius':'20%',
             'background-color':(i-1)*5+index===buildingIndex?choseBoxColor:'rgba(255, 255, 255, 0.0)'}"
-                   @click="onClickIcon((i-1)*5+index)">
-                <div class="text-3xl p-0.5">
-                  <i :class="iconLib[index]" :style="{'color':buildingIconColor}"></i>
-                </div>
-                <div class="text-1xl p-0.5 whitespace-nowrap">{{ building }}</div>
+                 @click="onClickIcon((i-1)*5+index)">
+              <div class="text-3xl p-0.5">
+                <i :class="iconLib[index]" :style="{'color':buildingIconColor}"></i>
               </div>
+              <div class="text-1xl p-0.5 whitespace-nowrap">{{ building }}</div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>

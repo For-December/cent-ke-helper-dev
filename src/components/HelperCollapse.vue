@@ -13,7 +13,6 @@
 
         <div class="bg-[#fefae0]">
           <KingArea
-              v-if="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)!).length>0"
               :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)!)"
               v-model="curBuildings[0]"
           />

@@ -38,11 +38,11 @@ export const GlobalCacheObj = (() => {
 
         GlobalTeachInfosObj.loadGlobalTeachInfos(true)
 
-        const localTimeStr = JSON.parse(localStorage.getItem(curTimeCacheKey)||'')
-        const localTime: Ref<Array<number>> = ref(
-            localTimeStr
+        const localTimeStr = localStorage.getItem(curTimeCacheKey)
+        const localTime: Ref<Array<number>> | null = ref(
+            JSON.parse(localTimeStr||"[]")
         );
-        if (localTimeStr != null && localTime.value.length == 3) {
+        if (localTimeStr != null && localTime != null && localTime.value.length == 3) {
             weekday.value = weekdayMap[localTime.value[1]];
             lessonNum.value = localTime.value[2];
         }
@@ -57,7 +57,7 @@ export const GlobalCacheObj = (() => {
                     }, 2000);
                 }
                 let curTime = localStorage.getItem(curTimeCacheKey);
-                let t: Array<number> | null = JSON.parse(curTime ? curTime : '');
+                let t: Array<number> | null = JSON.parse(curTime ?? '[]');
                 // console.log(t)
                 // console.log(data)
 
@@ -66,6 +66,7 @@ export const GlobalCacheObj = (() => {
                     curTime != null &&
                     curTime != "" &&
                     t != null &&
+                    t.length==3 &&
                     t[0] === data.weekNum &&
                     t[1] === data.weekday &&
                     t[2] === data.lessonNum
