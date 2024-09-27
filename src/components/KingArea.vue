@@ -74,40 +74,42 @@ const onClickIcon = (index: number) => {
 </script>
 
 <template>
-  <div class="relative rounded-xl overflow-auto pb-2 opacity-100" v-if="buildings.length>0">
-    <div class="relative w-full flex gap-0 snap-x snap-mandatory overflow-x-auto scroll-smooth"
-         ref="scrollContent"
-         @scroll="handleScroll">
-      <div class="snap-always snap-center shrink-0 first:pl-0 last:pr-0 w-[100%]"
-           v-for="i in pageSize">
+  <div v-if="buildings.length>0">
+    <div class="relative rounded-xl overflow-auto pb-2 opacity-100">
+      <div class="relative w-full flex gap-0 snap-x snap-mandatory overflow-x-auto scroll-smooth"
+           ref="scrollContent"
+           @scroll="handleScroll">
+        <div class="snap-always snap-center shrink-0 first:pl-0 last:pr-0 w-[100%]"
+             v-for="i in pageSize">
 
-        <div class="grid grid-cols-5 pt-5 pb-5  border-l-0.5 border-r-0.5">
-          <div v-for="(building,index) in partOfBuildings(i-1)" class="text-center transition-all">
-            <div :style="{
+          <div class="grid grid-cols-5 pt-5 pb-5  border-l-0.5 border-r-0.5">
+            <div v-for="(building,index) in partOfBuildings(i-1)" class="text-center transition-all">
+              <div :style="{
               'border-color': (i-1)*5+index===buildingIndex?buildingIconColor:'rgba(255, 255, 255, 0.0)',
             'border-width':'2.5px',
             'border-radius':'20%',
             'background-color':(i-1)*5+index===buildingIndex?choseBoxColor:'rgba(255, 255, 255, 0.0)'}"
-                 @click="onClickIcon((i-1)*5+index)">
-              <div class="text-3xl p-0.5">
-                <i :class="iconLib[index]" :style="{'color':buildingIconColor}"></i>
+                   @click="onClickIcon((i-1)*5+index)">
+                <div class="text-3xl p-0.5">
+                  <i :class="iconLib[index]" :style="{'color':buildingIconColor}"></i>
+                </div>
+                <div class="text-1xl p-0.5 whitespace-nowrap">{{ building }}</div>
               </div>
-              <div class="text-1xl p-0.5 whitespace-nowrap">{{ building }}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!--   进度条-->
-  <div class="flex flex-row place-content-center pb-4" v-if="pageSize!==1">
-    <div v-for="i in pageSize">
-      <div :class="{
+    <!--   进度条-->
+    <div class="flex flex-row place-content-center pb-4" v-if="pageSize!==1">
+      <div v-for="i in pageSize">
+        <div :class="{
        'w-20 h-2 rounded ml-1 mr-1':true,
        'bg-blue-500':i-1===curScrollIndex,
        'bg-blue-200':i-1!==curScrollIndex
      }" @click="onClickProcess(i-1)"></div>
+      </div>
     </div>
   </div>
 
