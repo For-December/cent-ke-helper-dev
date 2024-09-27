@@ -40,10 +40,6 @@ watch(validData, (newValue) => {
     交流群: 240728548
   </div>
 
-  <div>
-    <n-button type="warning">新内容</n-button>
-  </div>
-
 </template>
 
 <style scoped>

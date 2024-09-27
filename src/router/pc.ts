@@ -4,7 +4,7 @@ import {RouteRecordRaw} from "vue-router";
 export const routes:Array<RouteRecordRaw> = [
     {
         path: '/',
-        component: () => import('@/view/ListHome.vue'),
+        component: () => import('@/view/pc/ListHome.vue'),
         meta: {hidden: true}
     }
 ]

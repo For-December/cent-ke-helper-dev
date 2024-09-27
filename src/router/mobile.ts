@@ -9,7 +9,7 @@ export const routes:Array<RouteRecordRaw> = [
     },
     {
         path: '/list',
-        component: () => import('@/view/ListHome.vue'),
+        component: () => import('@/view/pc/ListHome.vue'),
         meta: {hidden: true}
     }
 ]
