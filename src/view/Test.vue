@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 const tabIndex = ref(0);
 const tabs = ['tab栏1', 'tab栏2', 'tab栏3', 'tab栏4'];
@@ -44,7 +44,7 @@ const contents=[
     title:'tab栏四区域'
   }
 ];
-const changeTab = (index) => {
+const changeTab = (index:number) => {
   tabIndex.value = index;
 };
 

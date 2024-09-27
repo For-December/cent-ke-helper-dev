@@ -2,17 +2,18 @@
 
 import {getTimeGap} from "../utils/globalFunc.ts";
 import {onMounted, ref} from "vue";
-import {Delete, InfoFilled} from "@element-plus/icons-vue";
 import DeleteButton from "@/components/DeleteButton.vue";
+import {PostMeta, PostRecord} from "@/types/treeHole.ts";
 
 const goPostDetail = (id: number) => {
   console.log(id)
 }
 
-const item = ref({
+const item = ref<PostRecord>({
+  authorId: 0, commentCount: 0, content: [], createdAt: new Date(), title: "", updatedAt: new Date(),
   id: 1,
   authorName: "芝士雪豹",
-  latestRepliedAt: "2021-10-10 10:10:10",
+  latestRepliedAt: new Date("2021-10-10 10:10:10"),
   upvoteCount: 10,
   contentJson: JSON.stringify([
     {

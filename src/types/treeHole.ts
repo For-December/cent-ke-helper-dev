@@ -1,10 +1,10 @@
-interface PostMeta {
+export interface PostMeta {
     type: string;
     text: string;
     url: string;
 }
 
-class PostRecord {
+export class PostRecord {
     id: number;
     authorId: number;
     authorName: string;
@@ -12,7 +12,7 @@ class PostRecord {
     upvoteCount: number;
     title: string;
     content: PostMeta[];
-    contentJson:string;
+    contentJson: string;
     latestRepliedAt: Date; // 毫秒为单位
     createdAt: Date;
     updatedAt: Date;
@@ -20,7 +20,7 @@ class PostRecord {
     constructor(id: number, authorId: number, authorName: string,
                 commentCount: number, upvoteCount: number,
                 title: string, content: PostMeta[],
-                contentJson:string,
+                contentJson: string,
                 latestRepliedAt: Date, createdAt: Date, updatedAt: Date) {
         this.id = id;
         this.authorId = authorId;

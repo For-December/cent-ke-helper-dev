@@ -78,10 +78,6 @@
 
 <script setup lang="ts">
 
-import KingArea from "@/components/helper/KingArea.vue";
-
-import {globalDepartments, GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
-import CourseList from "@/components/helper/CourseList.vue";
 import {ref} from "vue";
 import HelperContent from "@/components/helper/HelperContent.vue";
 

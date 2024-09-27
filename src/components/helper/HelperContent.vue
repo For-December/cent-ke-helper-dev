@@ -77,7 +77,7 @@ const partOfBuildings = (n: number): string[] => {
 const buildingIndex = ref(0)
 
 
-const contentHeight = ref(1)
+const contentHeight = ref('1')
 
 // 切换图标时修改高度
 const onClickIcon = (index: number) => {

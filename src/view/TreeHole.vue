@@ -4,6 +4,7 @@ import PostCreator from "@/components/PostCreator.vue";
 import {webGetPosts} from "@/api/posts.ts";
 import PostCard from "@/components/PostCard.vue";
 import {ListModel} from "@/types/listModel.ts";
+import {PostRecord} from "@/types/treeHole.ts";
 
 
 const loadPosts = reactive({
@@ -66,7 +67,7 @@ const onLoad = () => {
         @load="onLoad"
     >
 <!--      这里如果是 postItemsListModel.listModelData.value 必须 .value-->
-      <div v-for="postItem in postItems" :key="postItem">
+      <div v-for="postItem in postItems" :key="postItem.id">
         <PostCard :post-item="postItem"/>
       </div>
       <!--      <div v-for="item in list" :key="item.id as number">-->

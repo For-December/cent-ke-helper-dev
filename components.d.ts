@@ -7,7 +7,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    CollapseContent: typeof import('./src/components/helper/CollapseContent.vue')['default']
     CourseCard: typeof import('./src/components/helper/CourseCard.vue')['default']
     CourseList: typeof import('./src/components/helper/CourseList.vue')['default']
     DeleteButton: typeof import('./src/components/DeleteButton.vue')['default']
@@ -24,7 +23,6 @@ declare module 'vue' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     HelperCollapse: typeof import('./src/components/helper/HelperCollapse.vue')['default']
-    HelperCollapseContent: typeof import('./src/components/helper/HelperCollapseContent.vue')['default']
     HelperContent: typeof import('./src/components/helper/HelperContent.vue')['default']
     KingArea: typeof import('./src/components/helper/KingArea.vue')['default']
     NLayout: typeof import('naive-ui')['NLayout']
@@ -39,10 +37,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     VanBackTop: typeof import('vant/es')['BackTop']
     VanCol: typeof import('vant/es')['Col']
-    VanDivider: typeof import('vant/es')['Divider']
     VanField: typeof import('vant/es')['Field']
-    VanGrid: typeof import('vant/es')['Grid']
-    VanGridItem: typeof import('vant/es')['GridItem']
     VanImage: typeof import('vant/es')['Image']
     VanList: typeof import('vant/es')['List']
     VanLoading: typeof import('vant/es')['Loading']

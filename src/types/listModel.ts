@@ -41,7 +41,7 @@ export class ListModel<T> {
                 return true
             } else {
                 // 还有数据需要获取,准备获取下一页
-                this.nextPage++
+                this.nextPage.value++
                 return false
             }
         })
