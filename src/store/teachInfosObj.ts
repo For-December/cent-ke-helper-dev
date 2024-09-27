@@ -30,10 +30,15 @@ export const GlobalTeachInfosObj = (() => {
     const apiErrorMsg = ref<string>('')
 
 
+    function getBuildingInfosMap(department: string): Map<string, Items.TeachInfo[]> {
+        return teachInfos.value.get(department) ?? new Map<string, Items.TeachInfo[]>()
+    }
+
     function getTeachInfos(department: string, building: string): Items.TeachInfo[] {
         if (!teachInfos.value.get(department)) {
             return []
         }
+        console.log(teachInfos.value.get(department)!.get(building)!)
 
         if (building === '') {
             return teachInfos.value
@@ -49,7 +54,7 @@ export const GlobalTeachInfosObj = (() => {
 
 
     function loadGlobalTeachInfos(cacheable: boolean) {
-
+        // console.log(teachInfos.value)
         if (cacheable) {
             let data = localStorage.getItem(teachInfosCacheKey)
             if (data != null && data != '') {
@@ -106,6 +111,7 @@ export const GlobalTeachInfosObj = (() => {
         getBuildings,
         loadGlobalTeachInfos,
         getTeachInfos,
+        getBuildingInfosMap,
         apiErrorMsg
     };
 })();

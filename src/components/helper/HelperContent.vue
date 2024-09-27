@@ -1,6 +1,9 @@
 <script setup lang="ts">
 
 import {computed, onMounted, ref} from "vue";
+import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
+import CourseCard from "@/components/helper/CourseCard.vue";
+import {Items} from "@/types/Items";
 
 // 样式
 const buildingIconColor = '#606c38'
@@ -16,17 +19,26 @@ const iconLib = ref([
   "bi bi-slash-square-fill",
 ])
 
-// 数据
-const {allBuildings} =
-    defineProps({
-      allBuildings: Array<string>
-    })
 
 const curBuilding = defineModel()
 
-const buildings = ref<string[]>([])
+const props = defineProps(['curDepartment'])
+
+const buildings = computed(() => {
+  return GlobalTeachInfosObj.getBuildings(props.curDepartment)
+})
+
+const infosArray = ref<Items.TeachInfo[][]>([])
+
+
 onMounted(() => {
-  buildings.value = allBuildings || []
+  console.log(infosArray.value)
+  GlobalTeachInfosObj.getBuildingInfosMap(props.curDepartment).forEach(
+      (value, _) => {
+        console.log(value)
+        infosArray.value.push(value)
+      }
+  )
 })
 
 
@@ -63,11 +75,20 @@ const partOfBuildings = (n: number): string[] => {
 // const emits = defineEmits(['clickIcon']);
 
 const buildingIndex = ref(0)
+
+
+const contentHeight = ref(1)
+
+// 切换图标时修改高度
 const onClickIcon = (index: number) => {
   // emits('clickIcon', buildings.value[index])
   console.log(curBuilding.value)
   buildingIndex.value = index
   curBuilding.value = buildings.value[index]
+
+  contentHeight.value =
+      document.getElementById(
+          'items-' + buildingIndex.value)?.clientHeight + 'px'
 }
 
 </script>
@@ -112,9 +133,51 @@ const onClickIcon = (index: number) => {
     </div>
   </div>
 
+  <div class="bg-[#dda15e]/50">
+    <div v-if="GlobalTeachInfosObj.apiErrorMsg.value!=''">
+      网络异常，请通过正确的域名访问~
+      {{ GlobalTeachInfosObj.apiErrorMsg }}
+    </div>
+    <div v-else-if="infosArray.length===0">
+      <!---->
+      <!--      无课图片-->
+      <div class="pb-10">
+        <div class="flex place-content-center">
+          <img class="w-50" src="/src/assets/desk3.png" alt="">
+        </div>
+        <div class="text-center text-2xl">该学部这个时间没有课~</div>
+      </div>
+      <!---->
+    </div>
+    <div v-else>
+
+      <div class="helper-content" :style="{ transform: `translateX(${-buildingIndex * 100}%)` }">
+        <div v-for="(teachInfos,idx) in infosArray" :key="idx" class="helper-item">
+          <div class="pt-2" :id="'items-'+idx">
+            <div class="mt-3 pb-1"
+                 v-for="teachInfo in teachInfos">
+              <CourseCard :teach-info="teachInfo"/>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </template>
 
 <style scoped>
+.helper-content {
+  display: flex;
+  transition: transform 0.5s ease; /* 添加过渡效果，并使用缓动函数 */
+}
 
+.helper-item {
+  flex: 1;
+  min-width: 100%;
+  max-height: v-bind(contentHeight);
+}
 </style>

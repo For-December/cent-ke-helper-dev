@@ -8,7 +8,7 @@ import {validData} from "@/store/globalData.ts";
 
 GlobalCacheObj.loadData()
 watch(validData, (newValue) => {
-  if (newValue == false) {
+  if (!newValue) {
     // console.log(validData.value)
     // 第二次请求
     GlobalTeachInfosObj.loadGlobalTeachInfos(false)

@@ -7,12 +7,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CollapseContent: typeof import('./src/components/helper/CollapseContent.vue')['default']
     CourseCard: typeof import('./src/components/helper/CourseCard.vue')['default']
     CourseList: typeof import('./src/components/helper/CourseList.vue')['default']
     DeleteButton: typeof import('./src/components/DeleteButton.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElCollapse: typeof import('element-plus/es')['ElCollapse']
     ElCollapseItem: typeof import('element-plus/es')['ElCollapseItem']
@@ -22,6 +24,8 @@ declare module 'vue' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     HelperCollapse: typeof import('./src/components/helper/HelperCollapse.vue')['default']
+    HelperCollapseContent: typeof import('./src/components/helper/HelperCollapseContent.vue')['default']
+    HelperContent: typeof import('./src/components/helper/HelperContent.vue')['default']
     KingArea: typeof import('./src/components/helper/KingArea.vue')['default']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']

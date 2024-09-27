@@ -11,17 +11,21 @@
           <span class="ml-1">文理学部</span>
         </template>
 
-        <div class="bg-[#fefae0]">
-          <KingArea
-              :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)!)"
-              v-model="curBuildings[0]"
-          />
-        </div>
-
-        <CourseList
-            :cur-department="globalDepartments.at(0)"
-            :cur-building="curBuildings[0]"
+        <HelperContent
+        cur-department="文理学部"
+        v-model="curBuildings[0]"
         />
+<!--        <div class="bg-[#fefae0]">-->
+<!--          <KingArea-->
+<!--              :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)!)"-->
+<!--              v-model="curBuildings[0]"-->
+<!--          />-->
+<!--        </div>-->
+
+<!--        <CourseList-->
+<!--            :cur-department="globalDepartments.at(0)"-->
+<!--            :cur-building="curBuildings[0]"-->
+<!--        />-->
 
 
       </el-collapse-item>
@@ -32,15 +36,10 @@
           </span>
           <span class="ml-1">工学部</span>
         </template>
-        <KingArea
-            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(1)!)"
+
+        <HelperContent
+            cur-department="工学部"
             v-model="curBuildings[1]"
-
-        />
-
-        <CourseList
-            :cur-department="globalDepartments.at(1)"
-            :cur-building="curBuildings[1]"
         />
 
 
@@ -52,15 +51,9 @@
           </span>
           <span class="ml-1">信息学部</span>
         </template>
-        <KingArea
-            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(2)!)"
+        <HelperContent
+            cur-department="信息学部"
             v-model="curBuildings[2]"
-
-        />
-
-        <CourseList
-            :cur-department="globalDepartments.at(2)"
-            :cur-building="curBuildings[2]"
         />
 
 
@@ -72,15 +65,11 @@
           </span>
           <span class="ml-1">医学部</span>
         </template>
-        <KingArea
-            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(3)!)"
+
+        <HelperContent
+            cur-department="医学部"
             v-model="curBuildings[3]"
         />
-        <CourseList
-            :cur-department="globalDepartments.at(3)"
-            :cur-building="curBuildings[3]"
-        />
-
 
       </el-collapse-item>
     </el-collapse>
@@ -94,6 +83,7 @@ import KingArea from "@/components/helper/KingArea.vue";
 import {globalDepartments, GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
 import CourseList from "@/components/helper/CourseList.vue";
 import {ref} from "vue";
+import HelperContent from "@/components/helper/HelperContent.vue";
 
 const activeName = ref('1')
 const curBuildings = ref(['', '', '', '', ''])

@@ -11,6 +11,11 @@ export const routes:Array<RouteRecordRaw> = [
         path: '/tree-hole',
         component: () => import('@/view/Index.vue'),
         meta: {hidden: true}
+    },
+    {
+        path: '/test',
+        component: () => import('@/view/Test.vue'),
+        meta: {hidden: true}
     }
 ]
 
