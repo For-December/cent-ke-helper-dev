@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import {onMounted, reactive, ref} from "vue";
+import {computed, onMounted, reactive, ref} from "vue";
 import PostCreator from "@/components/PostCreator.vue";
 import {webGetPosts} from "@/api/posts.ts";
 import PostCard from "@/components/PostCard.vue";
+import {ListModel} from "@/types/listModel.ts";
 
 
 const loadPosts = reactive({
@@ -23,29 +24,27 @@ const onRefresh = () => {
   }, 1000);
 }
 
-const postItems = ref<PostRecord[]>([])
+const postItems = computed(()=>{
+  return postItemsListModel.listModelData.value
+})
 
+const postItemsListModel = new ListModel<PostRecord>()
 onMounted(() => {
 
+  console.log(postItemsListModel.listModelData.value)
 })
 
 const onLoad = () => {
-  console.log(1)
-  webGetPosts().then((res) => {
-    postItems.value.length = 0
-    res.forEach((item) => {
-      item.createdAt = new Date(item.createdAt)
-      item.updatedAt = new Date(item.updatedAt)
-      item.latestRepliedAt = new Date(item.latestRepliedAt)
-
-      postItems.value.push(item)
-    })
-
-
-    console.log(res[0].createdAt.getHours())
+  postItemsListModel.appendListModels(webGetPosts(), (item) => {
+    item.createdAt = new Date(item.createdAt)
+    item.updatedAt = new Date(item.updatedAt)
+    item.latestRepliedAt = new Date(item.latestRepliedAt)
+  }).then((isFinished: boolean) => {
+    if (isFinished) {
+      loadPosts.finished = true;
+    }
 
     loadPosts.loading = false;
-    loadPosts.finished = true;
   })
 }
 
@@ -67,7 +66,8 @@ const onLoad = () => {
         finished-text="没有更多了"
         @load="onLoad"
     >
-      <div v-for="postItem in postItems" :key="postItems">
+<!--      这里如果是 postItemsListModel.listModelData.value 必须 .value-->
+      <div v-for="postItem in postItems" :key="postItem">
         <PostCard :post-item="postItem"/>
       </div>
       <!--      <div v-for="item in list" :key="item.id as number">-->

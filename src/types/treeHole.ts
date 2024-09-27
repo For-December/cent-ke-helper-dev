@@ -12,6 +12,7 @@ class PostRecord {
     upvoteCount: number;
     title: string;
     content: PostMeta[];
+    contentJson:string;
     latestRepliedAt: Date; // 毫秒为单位
     createdAt: Date;
     updatedAt: Date;
@@ -19,6 +20,7 @@ class PostRecord {
     constructor(id: number, authorId: number, authorName: string,
                 commentCount: number, upvoteCount: number,
                 title: string, content: PostMeta[],
+                contentJson:string,
                 latestRepliedAt: Date, createdAt: Date, updatedAt: Date) {
         this.id = id;
         this.authorId = authorId;
@@ -27,6 +29,7 @@ class PostRecord {
         this.upvoteCount = upvoteCount;
         this.title = title;
         this.content = content;
+        this.contentJson = contentJson;
         this.latestRepliedAt = latestRepliedAt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

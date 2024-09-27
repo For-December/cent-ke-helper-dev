@@ -1,8 +1,8 @@
-import {request} from "@/api/myAxois.ts";
+import {request, TransDef} from "@/api/myAxois.ts";
 import {apiPrefix} from "@/api/globalConst.ts";
 
 export const webGetPosts = ()
-    : Promise<PostRecord[]> => {
+    : Promise<TransDef> => {
     return request({
         method: 'get',
         url: apiPrefix + '/posts',

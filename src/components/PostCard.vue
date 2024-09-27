@@ -33,8 +33,8 @@ const props = defineProps<{
 }>()
 onMounted(() => {
   item.value = props.postItem
-  console.log(props.postItem)
-  console.log(item.value)
+  // console.log(props.postItem)
+  // console.log(item.value)
 })
 
 

@@ -1,4 +1,10 @@
 export declare module Items {
+    export interface PageWrapper<T> {
+        page: number;
+        pageSize: number;
+        total: number;
+        list: Array<T>;
+    }
     export interface TeachInfo {
         room: string;
         faculty: string;
