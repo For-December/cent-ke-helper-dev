@@ -36,7 +36,7 @@ watch(validData, (newValue) => {
     </div>
   </div>
 
-  <div class="float-right mr-4">
+  <div class="float-right mr-4 text-blue-400">
     交流群: 240728548
   </div>
 
