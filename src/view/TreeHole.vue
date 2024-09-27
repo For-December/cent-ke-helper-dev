@@ -52,7 +52,6 @@ const onLoad = () => {
 </script>
 
 <template>
-  111
   <van-pull-refresh v-model="loadPosts.refreshing" @refresh="onRefresh" success-text="好好好！">
 
     <PostCreator/>

@@ -9,7 +9,7 @@ export const routes:Array<RouteRecordRaw> = [
     },
     {
         path: '/tree-hole',
-        component: () => import('@/view/TreeHole.vue'),
+        component: () => import('@/view/Index.vue'),
         meta: {hidden: true}
     }
 ]

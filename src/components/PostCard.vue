@@ -2,6 +2,8 @@
 
 import {getTimeGap} from "../utils/globalFunc.ts";
 import {onMounted, ref} from "vue";
+import {Delete, InfoFilled} from "@element-plus/icons-vue";
+import DeleteButton from "@/components/DeleteButton.vue";
 
 const goPostDetail = (id: number) => {
   console.log(id)
@@ -42,32 +44,31 @@ onMounted(() => {
 
 <template>
   <el-container>
-    <el-aside width="12vw">
+    <el-aside width="12vw" class="pt-[20px]">
       <!--              <Avatar style="width: 10vw;height: 10vw; margin: 0;border-radius: 50%"></Avatar>-->
       <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
                  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
       />
     </el-aside>
-    <el-main class="pt-0" @click="goPostDetail(item.id)">
+    <el-main class="pt-0">
       <el-row>
-        <el-col :span="12">{{ item.authorName }} @{{ item.authorName }}</el-col>
-        <el-col :span="12">
-          <div style="float: right">删除 分享</div>
+        <el-col :span="18" @click="goPostDetail(item.id)">
+          <div class="text-[5vw] text-amber-500">
+          {{ item.authorName }}
+          </div>
+        </el-col>
+        <el-col :span="6">
+          <div class="float-right">
+            <DeleteButton/>
+          </div>
         </el-col>
       </el-row>
 
       <!--              <p style="margin: 0;font-size: 15px">2 分钟前</p>-->
-      <p style="margin: 0;font-size: 15px">
+      <p class="text-[3vw] text-gray-500">
         {{ getTimeGap(new Date(), new Date(item.latestRepliedAt)) }}
 
       </p>
-      <div>
-        <!--                <br/>-->
-        <!--                {{ item.title + "\n" }}-->
-        <!--                <p style="margin: 0;">芝士雪豹</p>-->
-      </div>
-      <!--              :title="item.title"-->
-      <p></p>
       <div v-for="meta in JSON.parse(item.contentJson) as PostMeta[]">
         <div v-if="meta.type==='image'">
           <van-image
@@ -79,10 +80,8 @@ onMounted(() => {
             <template v-slot:error>图片加载失败</template>
           </van-image>
         </div>
-        <div v-if="meta.type==='text'">
+        <div v-if="meta.type==='text'" class="text-[5vw]">
           {{ meta.text }}
-          <br/>
-          <br/>
         </div>
 
         <div v-if="meta.type==='video'">
