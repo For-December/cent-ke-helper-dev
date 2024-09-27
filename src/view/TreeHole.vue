@@ -17,6 +17,7 @@ const count = ref(0);
 const onRefresh = () => {
   setTimeout(() => {
 
+    postItemsListModel.listInit()
     loadPosts.refreshing = false;
     loadPosts.finished = false;
 
@@ -25,7 +26,7 @@ const onRefresh = () => {
   }, 1000);
 }
 
-const postItems = computed(()=>{
+const postItems = computed(() => {
   return postItemsListModel.listModelData.value
 })
 
@@ -36,17 +37,19 @@ onMounted(() => {
 })
 
 const onLoad = () => {
-  postItemsListModel.appendListModels(webGetPosts(), (item) => {
-    item.createdAt = new Date(item.createdAt)
-    item.updatedAt = new Date(item.updatedAt)
-    item.latestRepliedAt = new Date(item.latestRepliedAt)
-  }).then((isFinished: boolean) => {
-    if (isFinished) {
-      loadPosts.finished = true;
-    }
+  postItemsListModel.appendListModels(webGetPosts(),
+      (item) => {
+        item.createdAt = new Date(item.createdAt)
+        item.updatedAt = new Date(item.updatedAt)
+        item.latestRepliedAt = new Date(item.latestRepliedAt)
+      })
+      .then((isFinished: boolean) => {
+        if (isFinished) {
+          loadPosts.finished = true;
+        }
 
-    loadPosts.loading = false;
-  })
+        loadPosts.loading = false;
+      })
 }
 
 
@@ -65,25 +68,13 @@ const onLoad = () => {
         :finished="loadPosts.finished"
         finished-text="没有更多了"
         @load="onLoad"
+
+        class="min-h-[70vh]"
     >
-<!--      这里如果是 postItemsListModel.listModelData.value 必须 .value-->
+      <!--      这里如果是 postItemsListModel.listModelData.value 必须 .value-->
       <div v-for="postItem in postItems" :key="postItem.id">
         <PostCard :post-item="postItem"/>
       </div>
-      <!--      <div v-for="item in list" :key="item.id as number">-->
-      <!--        <van-divider-->
-      <!--            :style="{ color: '#678cb2', borderColor: '#78b2b2',marginTop: '7px'}"-->
-      <!--        />-->
-
-      <!--        &lt;!&ndash;          <van-skeleton title avatar :row="3" :loading="true">&ndash;&gt;-->
-
-
-      <!--        <div>-->
-
-      <!--        </div>-->
-
-      <!--      </div>-->
-
 
     </van-list>
   </van-pull-refresh>

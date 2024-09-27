@@ -58,7 +58,7 @@ const onBeforeDelete = (file: any): boolean => {
   <el-container class="p-1.5">
     <!--    <el-aside>-->
     <!--    </el-aside>-->
-    <el-main>
+    <el-main class="border-[#bc6c25] border-b-2">
       <van-field
           v-model="postContext"
           rows="1"
@@ -68,7 +68,7 @@ const onBeforeDelete = (file: any): boolean => {
           placeholder="请输入帖子内容"
           show-word-limit
       />
-      <div>
+      <div class="pt-2">
 
         <van-popover v-model:show="showPopover" placement="bottom-start">
           <div>

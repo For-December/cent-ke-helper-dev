@@ -44,7 +44,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-container>
+  <el-container class="px-2">
     <el-aside width="12vw" class="pt-[20px]">
       <!--              <Avatar style="width: 10vw;height: 10vw; margin: 0;border-radius: 50%"></Avatar>-->
       <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
@@ -110,5 +110,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
+:deep(.el-main) {
+  padding-right: 0;
+}
 </style>
