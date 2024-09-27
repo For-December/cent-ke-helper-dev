@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-import {isApiError} from "@/api/globalConst.ts";
 import CourseCard from "@/components/CourseCard.vue";
 import {computed, onMounted} from "vue";
 import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";

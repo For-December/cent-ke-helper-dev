@@ -7,27 +7,17 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    BuildingKingArea: typeof import('./src/components/BuildingKingArea.vue')['default']
     CourseCard: typeof import('./src/components/CourseCard.vue')['default']
     CourseList: typeof import('./src/components/CourseList.vue')['default']
-    DepartmentCollapse: typeof import('./src/components/DepartmentCollapse.vue')['default']
     ElCollapse: typeof import('element-plus/es')['ElCollapse']
     ElCollapseItem: typeof import('element-plus/es')['ElCollapseItem']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     HelperCollapse: typeof import('./src/components/HelperCollapse.vue')['default']
     KingArea: typeof import('./src/components/KingArea.vue')['default']
-    Menu: typeof import('./src/components/Menu.vue')['default']
-    NButton: typeof import('naive-ui')['NButton']
-    NCollapse: typeof import('naive-ui')['NCollapse']
-    NCollapseItem: typeof import('naive-ui')['NCollapseItem']
-    NH2: typeof import('naive-ui')['NH2']
-    NIcon: typeof import('naive-ui')['NIcon']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NSpace: typeof import('naive-ui')['NSpace']
-    NVirtualList: typeof import('naive-ui')['NVirtualList']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -24,7 +24,7 @@ export const GlobalTeachInfosObj = (() => {
     )
 
     function getBuildings(department: string): string[] {
-        return departmentBuildingMap.value.get(department)
+        return departmentBuildingMap.value.get(department)!
     }
 
     const apiErrorMsg = ref<string>('')
@@ -37,14 +37,14 @@ export const GlobalTeachInfosObj = (() => {
 
         if (building === '') {
             return teachInfos.value
-                .get(department)
+                .get(department)!
                 .get(departmentBuildingMap.value.get(
                     department
-                ).at(0))
+                )!.at(0)!)!
         }
 
 
-        return teachInfos.value.get(department).get(building)
+        return teachInfos.value.get(department)!.get(building)!
     }
 
 

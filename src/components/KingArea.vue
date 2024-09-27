@@ -19,14 +19,14 @@ const iconLib = ref([
 // 数据
 const {allBuildings} =
     defineProps({
-      allBuildings: Array
+      allBuildings: Array<string>
     })
 
 const curBuilding = defineModel()
 
-const buildings = ref([])
+const buildings = ref<string[]>([])
 onMounted(() => {
-  buildings.value = allBuildings
+  buildings.value = allBuildings||[]
 })
 
 
@@ -36,7 +36,7 @@ const pageSize = computed(() => {
 
 // 动作
 const curScrollIndex = ref(0)
-const handleScroll = (e) => {
+const handleScroll = (e:any) => {
   for (let i = 0; i < pageSize.value; i++) {
     if (parseInt(e.target.scrollLeft) <=
         e.target.scrollWidth / pageSize.value * (i + 1) - e.target.offsetWidth / 2) {

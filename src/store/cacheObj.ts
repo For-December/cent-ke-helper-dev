@@ -33,12 +33,12 @@ export const GlobalCacheObj = (() => {
         }
     });
 
-    function loadData(){
+    function loadData() {
         // 使用缓存，而非默认值
 
         GlobalTeachInfosObj.loadGlobalTeachInfos(true)
 
-        const localTimeStr = JSON.parse(localStorage.getItem(curTimeCacheKey))
+        const localTimeStr = JSON.parse(localStorage.getItem(curTimeCacheKey)||'')
         const localTime: Ref<Array<number>> = ref(
             localTimeStr
         );
@@ -57,7 +57,7 @@ export const GlobalCacheObj = (() => {
                     }, 2000);
                 }
                 let curTime = localStorage.getItem(curTimeCacheKey);
-                let t: Array<number> = JSON.parse(curTime);
+                let t: Array<number> | null = JSON.parse(curTime ? curTime : '');
                 // console.log(t)
                 // console.log(data)
 
@@ -65,6 +65,7 @@ export const GlobalCacheObj = (() => {
                 if (
                     curTime != null &&
                     curTime != "" &&
+                    t != null &&
                     t[0] === data.weekNum &&
                     t[1] === data.weekday &&
                     t[2] === data.lessonNum

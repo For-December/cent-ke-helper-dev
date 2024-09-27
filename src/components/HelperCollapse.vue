@@ -13,8 +13,8 @@
 
         <div class="bg-[#fefae0]">
           <KingArea
-              v-if="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)).length>0"
-              :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0))"
+              v-if="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)!).length>0"
+              :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)!)"
               v-model="curBuildings[0]"
           />
         </div>
@@ -34,7 +34,7 @@
           <span class="ml-1">工学部</span>
         </template>
         <KingArea
-            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(1))"
+            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(1)!)"
             v-model="curBuildings[1]"
 
         />
@@ -54,7 +54,7 @@
           <span class="ml-1">信息学部</span>
         </template>
         <KingArea
-            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(2))"
+            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(2)!)"
             v-model="curBuildings[2]"
 
         />
@@ -74,7 +74,7 @@
           <span class="ml-1">医学部</span>
         </template>
         <KingArea
-            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(3))"
+            :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(3)!)"
             v-model="curBuildings[3]"
         />
         <CourseList

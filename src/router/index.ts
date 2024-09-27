@@ -18,6 +18,8 @@ const router = createRouter({
 //全局前置路由守卫————初始化的时候被调用、每次路由切换之前被调用
 router.beforeEach((to, _, next) => {
     //如果路由需要跳转
+    console.log(to)
+    console.log(next)
     next()
     // if (to.meta.isAuth) {
     //     //判断 如果school本地存储是qinghuadaxue的时候，可以进去
