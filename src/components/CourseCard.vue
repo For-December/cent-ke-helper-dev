@@ -35,26 +35,26 @@ const fontColors = ref(['#451344', '#052a05'])
 </script>
 
 <template>
-  <div class="mb-[4vw] rounded-2xl ml-[3vw] mr-[3vw]"
+  <div class="mb-4 rounded-2xl ml-3 mr-3"
        :style="{'background-color':infoCardColor}">
     <div class="grid grid-cols-2 gap-44
     justify-between place-items-center whitespace-nowrap
  pt-[1vh]">
-      <div class="text-[4.5vw]">{{ teachInfo.room }}</div>
-      <div class="border-2 rounded-2xl pl-[1.7vw] pr-[1.7vw] pt-[0.5vw] pb-[0.5vw] text-[3.5vw]"
+      <div class="text-2xl">{{ teachInfo.room }}</div>
+      <div class="border-2 rounded-2xl pl-1.5 pr-1.5 pt-0.5 pb-0.5 text-1xl"
            :style="{'background-color':bgColors[teachInfo.courseType==='通识课'?1:0],'border-color':borderColors[teachInfo.courseType==='通识课'?1:0],'color':fontColors[teachInfo.courseType==='通识课'?1:0]}">
         {{ teachInfo.courseType }}
       </div>
     </div>
     <div class="grid grid-rows-1
-    justify-center place-content-center place-items-center ml-[5vw] mr-[5vw] text-center
-text-[5.5vw]">
+    justify-center place-content-center place-items-center ml-5 mr-5 text-center
+text-[150%]">
       {{ teachInfo.courseName }}
     </div>
     <div class="grid grid-cols-3 gap-1
     justify-between whitespace-nowrap
-    text-[3.2vw] pb-[1.1vh] pt-[1vh]">
-      <div class="text-left pl-[2vw]">「{{ teachInfo.faculty }}」</div>
+    text-[83%] pb-[1.1vh] pt-[1vh]">
+      <div class="text-left pl-2">「{{ teachInfo.faculty }}」</div>
       <div class="text-center">
         <ul>
           <li>
@@ -63,7 +63,7 @@ text-[5.5vw]">
         </ul>
 
       </div>
-      <div class="text-right pr-[2vw]">起止时间: {{ teachInfo.courseTime }}</div>
+      <div class="text-right pr-2">起止时间: {{ teachInfo.courseTime }}</div>
     </div>
   </div>
 </template>

@@ -29,7 +29,7 @@ const isApiSomeErr = computed(()=>{
 </script>
 
 <template>
-  <div class="bg-[#dda15e]/50 pt-[2vw]">
+  <div class="bg-[#dda15e]/50 pt-2">
     <div v-if="isApiSomeErr">
       网络异常，请通过正确的域名访问~
       {{GlobalTeachInfosObj.apiErrorMsg}}
@@ -37,17 +37,17 @@ const isApiSomeErr = computed(()=>{
     <div v-else-if="!hasInfo">
 
 <!--      无课图片-->
-      <div class="pb-[10vw]">
+      <div class="pb-10">
         <div class="flex place-content-center">
-          <img class="w-[50vw]" src="/src/assets/desk3.png" alt="">
+          <img class="w-50" src="/src/assets/desk3.png" alt="">
         </div>
-        <div class="text-center text-[6vw]">该学部这个时间没有课~</div>
+        <div class="text-center text-2xl">该学部这个时间没有课~</div>
       </div>
 
     </div>
     <div v-else>
       <div>
-        <div class="mt-[3vw] pb-[1vw]"
+        <div class="mt-3 pb-1"
              v-for="teachInfo in teachInfos">
           <CourseCard :teach-info="teachInfo"/>
         </div>
