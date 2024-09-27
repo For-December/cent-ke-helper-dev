@@ -4,7 +4,7 @@ import {RouteRecordRaw} from "vue-router";
 export const routes:Array<RouteRecordRaw> = [
     {
         path: '/',
-        component: () => import('@/view/HelperPage.vue'),
+        component: () => import('@/view/ListHome.vue'),
         meta: {hidden: true}
     }
 ]

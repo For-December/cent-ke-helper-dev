@@ -21,22 +21,22 @@ watch(validData, (newValue) => {
   <div class="bg-[#ffffff] text-[#000001]">
     <div class="bg-[#dda15e]/50 h-[100%]">
       <div
-          class="flex w-[100vw] h-[11vw] bg-[#dda15e] border-[0.5vw] border-[#bc6c25] place-items-center place-content-center mt"
+          class="flex w-[100%] h-11 bg-[#dda15e] border-2 border-[#bc6c25] place-items-center place-content-center mt"
       >
-        <h1 class="text-[5vw]">蹭课小助手</h1>
+        <h1 class="text-1xl">蹭课小助手</h1>
       </div>
 
       <div
-          class="flex h-[11vw] bg-[#dda15e]/50 place-items-center place-content-center rounded-3xl mt-[3.5vw] ml-[6vw] mr-[6vw] mb-[3.5vw]"
+          class="flex h-11 bg-[#dda15e]/50 place-items-center place-content-center rounded-3xl mt-3.5 ml-6 mr-6 mb-3.5"
       >
-        <div class="text-[4.5vw]">{{ GlobalCacheObj.weekday }} {{ GlobalCacheObj.lessonTime }}</div>
+        <div class="text-4">{{ GlobalCacheObj.weekday }} {{ GlobalCacheObj.lessonTime }}</div>
       </div>
 
       <HelperCollapse/>
     </div>
   </div>
 
-  <div class="float-right mr-[4vw]">
+  <div class="float-right mr-4">
     交流群: 240728548
   </div>
 

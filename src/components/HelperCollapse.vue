@@ -107,8 +107,9 @@ const curBuildings = ref(['', '', '', '', ''])
 <style scoped lang="scss">
 :deep(.el-collapse-item .el-collapse-item__header) {
   background: #dda15e;
-  border: #bc6c25 0.5vw solid;
-  margin-bottom: 1vw;
+  border: #bc6c25 2px solid;
+  margin-bottom: 1%;
+  //height: 5vw;
 }
 
 :deep(.el-collapse-item .el-collapse-item__content) {
