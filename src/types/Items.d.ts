@@ -1,5 +1,3 @@
-import {ref} from "vue";
-
 export declare module Items {
     export interface TeachInfo {
         room: string;

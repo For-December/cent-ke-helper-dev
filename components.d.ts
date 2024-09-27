@@ -25,6 +25,7 @@ declare module 'vue' {
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NSpace: typeof import('naive-ui')['NSpace']
+    PostCard: typeof import('./src/components/PostCard.vue')['default']
     PostCreator: typeof import('./src/components/PostCreator.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
