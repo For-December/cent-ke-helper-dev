@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {computed, onMounted, ref} from "vue";
-import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
+import {globalDepartments, GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
 import CourseCard from "@/components/helper/CourseCard.vue";
 import {Items} from "@/types/Items";
 
@@ -22,10 +22,10 @@ const iconLib = ref([
 
 const curBuilding = defineModel()
 
-const props = defineProps(['curDepartment'])
+const props = defineProps(['curDepartmentIndex'])
 
 const buildings = computed(() => {
-  return GlobalTeachInfosObj.getBuildings(props.curDepartment)
+  return GlobalTeachInfosObj.getBuildings(globalDepartments.value[props.curDepartmentIndex])
 })
 
 const infosArray = ref<Items.TeachInfo[][]>([])
@@ -33,7 +33,8 @@ const infosArray = ref<Items.TeachInfo[][]>([])
 
 onMounted(() => {
   console.log(infosArray.value)
-  GlobalTeachInfosObj.getBuildingInfosMap(props.curDepartment).forEach(
+  GlobalTeachInfosObj.getBuildingInfosMap(
+      globalDepartments.value[props.curDepartmentIndex]).forEach(
       (value, _) => {
         console.log(value)
         infosArray.value.push(value)
@@ -79,6 +80,7 @@ const buildingIndex = ref(0)
 
 const contentHeight = ref('1')
 
+const idPrefix = computed(() => 'items-' + props.curDepartmentIndex)
 // 切换图标时修改高度
 const onClickIcon = (index: number) => {
   // emits('clickIcon', buildings.value[index])
@@ -86,9 +88,13 @@ const onClickIcon = (index: number) => {
   buildingIndex.value = index
   curBuilding.value = buildings.value[index]
 
+
   contentHeight.value =
       document.getElementById(
-          'items-' + buildingIndex.value)?.clientHeight + 'px'
+          idPrefix.value + buildingIndex.value)?.clientHeight + 'px'
+  console.log(document.getElementById(
+      idPrefix.value + buildingIndex.value)?.clientHeight + 'px')
+
 }
 
 </script>
@@ -153,7 +159,7 @@ const onClickIcon = (index: number) => {
 
       <div class="helper-content" :style="{ transform: `translateX(${-buildingIndex * 100}%)` }">
         <div v-for="(teachInfos,idx) in infosArray" :key="idx" class="helper-item">
-          <div class="pt-2" :id="'items-'+idx">
+          <div class="pt-2" :id="idPrefix+idx">
             <div class="mt-3 pb-1"
                  v-for="teachInfo in teachInfos">
               <CourseCard :teach-info="teachInfo"/>

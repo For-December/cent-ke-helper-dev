@@ -12,20 +12,20 @@
         </template>
 
         <HelperContent
-        cur-department="文理学部"
-        v-model="curBuildings[0]"
+            :cur-department-index="0"
+            v-model="curBuildings[0]"
         />
-<!--        <div class="bg-[#fefae0]">-->
-<!--          <KingArea-->
-<!--              :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)!)"-->
-<!--              v-model="curBuildings[0]"-->
-<!--          />-->
-<!--        </div>-->
+        <!--        <div class="bg-[#fefae0]">-->
+        <!--          <KingArea-->
+        <!--              :all-buildings="GlobalTeachInfosObj.getBuildings(globalDepartments.at(0)!)"-->
+        <!--              v-model="curBuildings[0]"-->
+        <!--          />-->
+        <!--        </div>-->
 
-<!--        <CourseList-->
-<!--            :cur-department="globalDepartments.at(0)"-->
-<!--            :cur-building="curBuildings[0]"-->
-<!--        />-->
+        <!--        <CourseList-->
+        <!--            :cur-department="globalDepartments.at(0)"-->
+        <!--            :cur-building="curBuildings[0]"-->
+        <!--        />-->
 
 
       </el-collapse-item>
@@ -38,7 +38,7 @@
         </template>
 
         <HelperContent
-            cur-department="工学部"
+            :cur-department-index="1"
             v-model="curBuildings[1]"
         />
 
@@ -52,7 +52,7 @@
           <span class="ml-1">信息学部</span>
         </template>
         <HelperContent
-            cur-department="信息学部"
+            :cur-department-index="2"
             v-model="curBuildings[2]"
         />
 
@@ -67,7 +67,7 @@
         </template>
 
         <HelperContent
-            cur-department="医学部"
+            :cur-department-index="3"
             v-model="curBuildings[3]"
         />
 
