@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CommentCreator: typeof import('./src/components/CommentCreator.vue')['default']
     CourseCard: typeof import('./src/components/helper/CourseCard.vue')['default']
     CourseList: typeof import('./src/components/helper/CourseList.vue')['default']
     DeleteButton: typeof import('./src/components/DeleteButton.vue')['default']
@@ -26,6 +27,9 @@ declare module 'vue' {
     HelperCollapse: typeof import('./src/components/helper/HelperCollapse.vue')['default']
     HelperContent: typeof import('./src/components/helper/HelperContent.vue')['default']
     KingArea: typeof import('./src/components/helper/KingArea.vue')['default']
+    NButton: typeof import('naive-ui')['NButton']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NInput: typeof import('naive-ui')['NInput']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
@@ -38,6 +42,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     VanBackTop: typeof import('vant/es')['BackTop']
     VanButton: typeof import('vant/es')['Button']
+    VanCellGroup: typeof import('vant/es')['CellGroup']
     VanCol: typeof import('vant/es')['Col']
     VanDivider: typeof import('vant/es')['Divider']
     VanField: typeof import('vant/es')['Field']

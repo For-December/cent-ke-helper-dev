@@ -10,6 +10,8 @@ import {useUserStore} from "@/store/modules/userStore.ts";
 import {Comment, Delete, InfoFilled} from "@element-plus/icons-vue";
 import {ListModel} from "@/types/listModel.ts";
 import {webGetComments} from "@/api/comments.ts";
+import PostCreator from "@/components/PostCreator.vue";
+import CommentCreator from "@/components/CommentCreator.vue";
 
 const postItem = defineModel()
 const item: Ref<PostRecord> = computed(() => {
@@ -112,6 +114,7 @@ onMounted(() => {
   // })
 })
 
+const showPopover = ref(false)
 </script>
 
 <template>
@@ -177,10 +180,21 @@ onMounted(() => {
       </van-col>
 
       <van-col span="4" class="text-right text-1xl">
-        <Icon size="6vw" color="#bc6c25">
-          <Comment/>
-        </Icon>
-        {{ item.commentCount }}
+
+        <van-popover v-model:show="showPopover" placement="bottom-end">
+
+          <CommentCreator/>
+
+          <template #reference>
+            <!--            点这个评论-->
+            <!--            reference内部所有元素都是触发popover的元素-->
+            <Icon size="6vw" color="#bc6c25">
+              <Comment/>
+            </Icon>
+            {{ item.commentCount }}
+          </template>
+        </van-popover>
+
       </van-col>
     </van-row>
   </div>
@@ -249,7 +263,7 @@ onMounted(() => {
               {{ getTimeGap(new Date(), new Date(item.modifyTime)) }}
             </div>
 
-              {{ item.content }}
+            {{ item.content }}
           </el-main>
         </el-container>
 
