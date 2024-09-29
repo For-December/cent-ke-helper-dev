@@ -44,9 +44,9 @@ onMounted(() => {
 
 const onLoad = () => {
   postItemsListModel.appendListModels(webGetPosts(
-      postItemsListModel.nextPage.value,
-      15,
-      ""),
+          postItemsListModel.nextPage.value,
+          15,
+          ""),
       (item) => {
         item.createdAt = new Date(item.createdAt)
         item.updatedAt = new Date(item.updatedAt)
@@ -66,11 +66,15 @@ const detailsModel = reactive({
   postItem: {} as PostRecord,
   show: false,
 })
+
+const postDetailsRef = ref(null)
+
 const onClickDetails = (post: PostRecord) => {
   console.log(post)
   detailsModel.postItem = post
   detailsModel.show = true
 }
+
 
 </script>
 
@@ -84,7 +88,7 @@ const onClickDetails = (post: PostRecord) => {
       :style="{ height: '60%' }"
   >
     <div class="p-5">
-      <PostDetails v-model="detailsModel.postItem"/>
+      <PostDetails v-model="detailsModel.postItem" ref="postDetailsRef"/>
     </div>
   </van-popup>
   <van-pull-refresh v-model="loadPosts.refreshing" @refresh="onRefresh" success-text="好好好！">

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {getTimeGap} from "@/utils/globalFunc.ts";
-import {computed, onUpdated, ref, Ref} from "vue";
+import {computed, onMounted, onUpdated, ref, Ref, watch} from "vue";
 import {CommentRecord, PostMeta, PostRecord} from "@/types/treeHole.ts";
 import {Icon} from "@vicons/utils";
 import HeartOutline from "@vicons/ionicons5/HeartOutline"
@@ -13,6 +13,8 @@ import {webGetComments} from "@/api/comments.ts";
 
 const postItem = defineModel()
 const item: Ref<PostRecord> = computed(() => {
+  // 每次切换帖子时，重新加载评论
+  reloadList()
   return postItem.value
 })
 
@@ -71,8 +73,9 @@ const commentItems = computed(() => {
 })
 
 const reloadList = () => {
+  console.log('reload')
   commentItemsListModel.listInit()
-  loadComments.finished = false;
+  loadComments.value.finished = false;
 }
 
 const onRefresh = () => {
@@ -102,6 +105,12 @@ const onLoad = () => {
         loadComments.value.loading = false;
       })
 }
+
+onMounted(() => {
+  // watch(() => item.value.id, () => {
+  //   reloadList()
+  // })
+})
 
 </script>
 
