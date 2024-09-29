@@ -44,3 +44,12 @@ export interface CreatePostParam {
     images: File[];
     tags: string;
 }
+
+export interface CommentRecord {
+    id: number;
+    postId: number;
+    authorId: number;
+    authorName: string;
+    content: string;
+    floorNum: number;
+}

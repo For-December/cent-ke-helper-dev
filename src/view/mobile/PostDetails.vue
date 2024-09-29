@@ -2,12 +2,12 @@
 
 import {getTimeGap} from "@/utils/globalFunc.ts";
 import {computed, ref, Ref} from "vue";
-import {PostMeta, PostRecord} from "@/types/treeHole.ts";
+import {CommentRecord, PostMeta, PostRecord} from "@/types/treeHole.ts";
 import {Icon} from "@vicons/utils";
 import HeartOutline from "@vicons/ionicons5/HeartOutline"
 import Heart from "@vicons/ionicons5/Heart"
 import {useUserStore} from "@/store/modules/userStore.ts";
-import {Comment} from "@element-plus/icons-vue";
+import {Comment, Delete, InfoFilled} from "@element-plus/icons-vue";
 
 const postItem = defineModel()
 const item: Ref<PostRecord> = computed(() => {
@@ -44,12 +44,41 @@ const starManager = (() => {
   return {
     onStar
   }
-})
-()
+})()
 
+
+const loadComments = ref({
+  loading: false,
+  finished: false,
+  refreshing: false
+})
+
+const comments = ref<CommentRecord[]>([
+  {
+    authorId: 0,
+    authorName: "芝士雪豹",
+    content: "我是评论的内容，没想到吧！！",
+    id: 1,
+    modifyTime: new Date(),
+    postId: 1
+  }
+])
+
+
+const onRefresh = () => {
+  setTimeout(() => {
+    // showToast('刷新成功');
+    // ElMessage.success("刷新成功！")
+    loadComments.value.refreshing = false;
+    loadComments.value.finished = false;
+    // onLoad();
+  }, 1000);
+}
 </script>
 
 <template>
+
+  <!--  帖子内容部分-->
   <div>
 
 
@@ -102,11 +131,11 @@ const starManager = (() => {
       <van-col span="16"></van-col>
 
       <van-col span="4">
-          <Icon @click="starManager.onStar()" size="6vw">
-            <HeartOutline v-if="!userStore.checkIfUpvote(item.id)"/>
-            <Heart v-else style="color: red"/>
-          </Icon>
-          {{ item.upvoteCount }}
+        <Icon @click="starManager.onStar()" size="6vw">
+          <HeartOutline v-if="!userStore.checkIfUpvote(item.id)"/>
+          <Heart v-else style="color: red"/>
+        </Icon>
+        {{ item.upvoteCount }}
       </van-col>
 
       <van-col span="4" class="text-right text-1xl">
@@ -116,13 +145,80 @@ const starManager = (() => {
         {{ item.commentCount }}
       </van-col>
     </van-row>
-    <van-divider
-        :style="{ color: '#bc6c25', borderColor: '#bc6c25', padding: '0 16px' }"
-    >
-      评论
-    </van-divider>
   </div>
-  {{ postItem }}
+
+
+  <!--  评论部分-->
+
+  <!--  {{ postItem }}-->
+
+  <van-pull-refresh v-model="loadComments.refreshing" @refresh="onRefresh" success-text="好好好！">
+
+    <van-list
+        v-model:loading="loadComments.loading"
+        :finished="loadComments.finished"
+        finished-text="没有更多了"
+        @load="onLoad"
+    >
+      <van-divider
+          :style="{ color: '#bc6c25', borderColor: '#bc6c25', padding: '0 16px' }"
+      >
+        评论区👇（下拉刷新）
+      </van-divider>
+
+      <div v-for="item in comments" :key="item.id">
+        <el-container>
+          <el-aside width="12vw">
+            <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
+                       src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+            />
+            <el-tag type="warning">
+              {{ item.floorNum ?? 1 }} 楼
+            </el-tag>
+          </el-aside>
+          <el-main style="padding-top: 0;">
+            <el-row>
+              <el-col :span="12">
+                {{ item.authorName }}
+              </el-col>
+              <el-col :span="12">
+                <div style="float: right">
+                  <el-popconfirm
+                      confirm-button-text="Yes"
+                      cancel-button-text="No"
+                      :icon="InfoFilled"
+                      icon-color="#626AEF"
+                      title="确定要删除此评论?"
+                      @confirm="onDelete(item.id,item.postId,item.authorName)"
+                      @cancel=""
+                  >
+                    <template #reference>
+                      <el-button :type="'warning'" :icon="Delete" size="small"
+                                 circle
+                      />
+                    </template>
+                  </el-popconfirm>
+                </div>
+              </el-col>
+            </el-row>
+
+            <div class="text-gray-400">
+              {{ getTimeGap(new Date(), new Date(item.modifyTime)) }}
+            </div>
+
+            {{ item.content }}
+          </el-main>
+        </el-container>
+
+
+      </div>
+
+      <van-divider/>
+    </van-list>
+  </van-pull-refresh>
+
+  <!--  回到顶端-->
+  <van-back-top/>
 </template>
 
 <style scoped>

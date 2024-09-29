@@ -102,9 +102,6 @@ onMounted(() => {
         </div>
       </div>
 
-
-      <!--              + "我是帖子的内容，没想到吧！！"-->
-
       <van-row>
         <van-col span="6" style="text-align: left">
 
