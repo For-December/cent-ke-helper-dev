@@ -27,6 +27,9 @@ declare module 'vue' {
     HelperCollapse: typeof import('./src/components/helper/HelperCollapse.vue')['default']
     HelperContent: typeof import('./src/components/helper/HelperContent.vue')['default']
     KingArea: typeof import('./src/components/helper/KingArea.vue')['default']
+    NButton: typeof import('naive-ui')['NButton']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NInput: typeof import('naive-ui')['NInput']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
@@ -40,6 +43,7 @@ declare module 'vue' {
     VanBackTop: typeof import('vant/es')['BackTop']
     VanCol: typeof import('vant/es')['Col']
     VanDivider: typeof import('vant/es')['Divider']
+    VanField: typeof import('vant/es')['Field']
     VanImage: typeof import('vant/es')['Image']
     VanList: typeof import('vant/es')['List']
     VanLoading: typeof import('vant/es')['Loading']
@@ -48,5 +52,6 @@ declare module 'vue' {
     VanPullRefresh: typeof import('vant/es')['PullRefresh']
     VanRow: typeof import('vant/es')['Row']
     VanSkeleton: typeof import('vant/es')['Skeleton']
+    VanUploader: typeof import('vant/es')['Uploader']
   }
 }
