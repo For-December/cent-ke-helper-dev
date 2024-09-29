@@ -35,7 +35,7 @@ const item_t = ref<PostRecord>({
 
 const postItem = defineModel()
 
-const item = computed(()=>{
+const item = computed(() => {
   return postItem.value
 })
 onMounted(() => {
@@ -60,7 +60,7 @@ onMounted(() => {
       <el-row>
         <el-col :span="18" @click="goPostDetail(item)">
           <div class="text-[5vw] text-amber-500">
-          {{ item.authorName }}
+            {{ item.authorName }}
           </div>
         </el-col>
         <el-col :span="6">
@@ -118,9 +118,9 @@ onMounted(() => {
           </el-tag>
         </van-col>
         <van-col span="6" style="text-align: right">
-          <el-button type="warning">
-            评论
-          </el-button>
+          <el-tag type="warning" size="large">
+            评论: {{ item.commentCount }}
+          </el-tag>
         </van-col>
       </van-row>
     </el-main>

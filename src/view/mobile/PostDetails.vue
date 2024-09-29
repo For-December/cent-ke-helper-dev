@@ -7,6 +7,7 @@ import {Icon} from "@vicons/utils";
 import HeartOutline from "@vicons/ionicons5/HeartOutline"
 import Heart from "@vicons/ionicons5/Heart"
 import {useUserStore} from "@/store/modules/userStore.ts";
+import {Comment} from "@element-plus/icons-vue";
 
 const postItem = defineModel()
 const item: Ref<PostRecord> = computed(() => {
@@ -97,22 +98,26 @@ const starManager = (() => {
     </div>
     <p></p>
     <van-row style="margin: 5vw;">
-      <van-col span="4" style="text-align: left">
-        <Icon @click="starManager.onStar" size="8vw">
-          <HeartOutline v-if="!userStore.checkIfUpvote(item.id)"/>
-          <Heart v-else style="color: red"/>
+
+      <van-col span="16"></van-col>
+
+      <van-col span="4">
+          <Icon @click="starManager.onStar()" size="6vw">
+            <HeartOutline v-if="!userStore.checkIfUpvote(item.id)"/>
+            <Heart v-else style="color: red"/>
+          </Icon>
+          {{ item.upvoteCount }}
+      </van-col>
+
+      <van-col span="4" class="text-right text-1xl">
+        <Icon size="6vw" color="#bc6c25">
+          <Comment/>
         </Icon>
-      </van-col>
-      <van-col span="4" style="text-align: left;font-size: 20px">
-        {{ item.upvoteCount }}
-      </van-col>
-      <van-col span="8" style="text-align: center">转发: 8</van-col>
-      <van-col span="8" style="text-align: right">
-        评论：8
+        {{ item.commentCount }}
       </van-col>
     </van-row>
     <van-divider
-        :style="{ color: '#7ade7b', borderColor: '#5d9671', padding: '0 16px' }"
+        :style="{ color: '#bc6c25', borderColor: '#bc6c25', padding: '0 16px' }"
     >
       评论
     </van-divider>
