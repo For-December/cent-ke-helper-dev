@@ -197,13 +197,17 @@ onMounted(() => {
         :finished="loadComments.finished"
         finished-text="没有更多了"
         @load="onLoad"
-        class="min-h-[40vh]"
+        class="min-h-[30vh]"
     >
       <van-divider
           :style="{ color: '#bc6c25', borderColor: '#bc6c25', padding: '0 16px' }"
       >
         评论区👇（下拉刷新）
       </van-divider>
+
+      <div v-for="_ in 10">
+        <van-skeleton title avatar :row="5" :loading="loadComments.loading"/>
+      </div>
 
       <div v-for="item in commentItems" :key="item.id">
         <el-container>
