@@ -1,7 +1,7 @@
 export const baseURL =
     // window.location.origin;
-// 'http://localhost:80'
-    'https://cengkehelper.top';
+'http://localhost:80'
+    // 'https://cengkehelper.top';
 
 export const apiPrefix = '/api/v1'
 export const teachInfosCacheKey = "TEACH_INFO_CACHE"

@@ -44,7 +44,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-container class="px-2">
+  <el-container class="mx-2 border-[#bc6c25]/10 border-b-2">
     <el-aside width="12vw" class="pt-[20px]">
       <!--              <Avatar style="width: 10vw;height: 10vw; margin: 0;border-radius: 50%"></Avatar>-->
       <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
@@ -67,31 +67,34 @@ onMounted(() => {
 
       <!--              <p style="margin: 0;font-size: 15px">2 分钟前</p>-->
       <p class="text-[3vw] text-gray-500">
-        {{ getTimeGap(new Date(), new Date(item.latestRepliedAt)) }}
-
+        {{ getTimeGap(new Date(), item.latestRepliedAt) }}
       </p>
-      <div v-for="meta in JSON.parse(item.contentJson) as PostMeta[]">
-        <div v-if="meta.type==='image'">
-          <van-image
-              :src="meta.url"
-          >
-            <template v-slot:loading>
-              <van-loading type="spinner" size="20"/>
-            </template>
-            <template v-slot:error>图片加载失败</template>
-          </van-image>
-        </div>
-        <div v-if="meta.type==='text'" class="text-[5vw]">
-          {{ meta.text }}
-        </div>
 
-        <div v-if="meta.type==='video'">
-          <video controls width="300" height="100">
-            <source :src="meta.url" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      <div class="mt-1 mb-4">
+        <div v-for="meta in JSON.parse(item.contentJson) as PostMeta[]">
+          <div v-if="meta.type==='image'">
+            <van-image
+                :src="meta.url"
+            >
+              <template v-slot:loading>
+                <van-loading type="spinner" size="20"/>
+              </template>
+              <template v-slot:error>图片加载失败</template>
+            </van-image>
+          </div>
+          <div v-if="meta.type==='text'" class="text-[5vw]">
+            {{ meta.text }}
+          </div>
 
+          <div v-if="meta.type==='video'">
+            <video controls width="300" height="100">
+              <source :src="meta.url" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+
+        </div>
 
       </div>
 
@@ -99,10 +102,21 @@ onMounted(() => {
       <!--              + "我是帖子的内容，没想到吧！！"-->
 
       <van-row>
-        <van-col span="8" style="text-align: left">点赞: {{ item.upvoteCount }}</van-col>
-        <van-col span="8" style="text-align: center"></van-col>
-        <van-col span="8" style="text-align: right">
-          <el-button type="warning">评论</el-button>
+        <van-col span="6" style="text-align: left">
+
+        </van-col>
+        <van-col span="6" style="text-align: left">
+
+        </van-col>
+        <van-col span="6" style="text-align: center">
+          <el-tag type="warning" size="large">
+            点赞: {{ item.upvoteCount }}
+          </el-tag>
+        </van-col>
+        <van-col span="6" style="text-align: right">
+          <el-button type="warning">
+            评论
+          </el-button>
         </van-col>
       </van-row>
     </el-main>

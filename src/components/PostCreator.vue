@@ -6,6 +6,8 @@ import {UploaderFileListItem} from "vant/lib/uploader/types";
 import {webCreatePost} from "@/api/posts.ts";
 import {showWarningMsg} from "@/utils/globalFunc.ts";
 
+const emits = defineEmits(['onSuccess'])
+
 const showPopover = ref(false);
 const postContext = ref("");
 
@@ -66,9 +68,10 @@ const onCreatePost = () => {
   }).then(
       () => {
         showWarningMsg("发布成功")
-        message.value = ''
+        postContext.value = ''
         files.length = 0
-        isUploading.value = false
+
+        emits('onSuccess')
       }
   ).finally(() => {
     isPostCreating.value = false

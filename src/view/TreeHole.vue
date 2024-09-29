@@ -14,6 +14,11 @@ const loadPosts = reactive({
 });
 
 const count = ref(0);
+
+const reloadList = () => {
+  postItemsListModel.listInit()
+  loadPosts.finished = false;
+}
 const onRefresh = () => {
   setTimeout(() => {
 
@@ -58,7 +63,7 @@ const onLoad = () => {
 <template>
   <van-pull-refresh v-model="loadPosts.refreshing" @refresh="onRefresh" success-text="好好好！">
 
-    <PostCreator/>
+    <PostCreator @on-success="reloadList()"/>
     <div v-for="_ in 10">
       <van-skeleton title avatar :row="5" :loading="loadPosts.loading"/>
     </div>
