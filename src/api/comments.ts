@@ -21,7 +21,7 @@ export const webCreateComment = (id: number, content: string)
     : Promise<TransDef> => {
     return request({
         method: "post",
-        url: apiPrefix + "/post/" + id + "/comments",
+        url: apiPrefix + "/posts/" + id + "/comments",
         data: {
             content
         }

@@ -119,95 +119,96 @@ const showPopover = ref(false)
 const onClickImage = (url: string) => {
   console.log(url)
 }
+
+const onCommentSuccess = () => {
+  // 评论数增加
+  (postItem.value as PostRecord).commentCount++
+  reloadList()
+}
 </script>
 
 <template>
   <van-pull-refresh v-model="loadComments.refreshing" @refresh="onRefresh" success-text="好好好！">
 
-  <!--  帖子内容部分-->
-  <div>
+    <!--  帖子内容部分-->
+    <div>
 
 
-    <!--    头部用户部分-->
-    <el-row>
-      <el-col :span="4">
-        <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
-                   src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        />
-      </el-col>
-      <el-col :span="20">
-        {{ item.authorName }}<br/>
-        {{ getTimeGap(new Date(), new Date(item.latestRepliedAt)) }}
-      </el-col>
-    </el-row>
+      <!--    头部用户部分-->
+      <el-row>
+        <el-col :span="4">
+          <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
+                     src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+          />
+        </el-col>
+        <el-col :span="20">
+          {{ item.authorName }}<br/>
+          {{ getTimeGap(new Date(), new Date(item.latestRepliedAt)) }}
+        </el-col>
+      </el-row>
 
-    <!--    帖子内容的部分-->
-    <div style="margin: 5vw">
-      <div v-for="meta in JSON.parse(item.contentJson) as PostMeta[]">
-        <div v-if="meta.type==='image'" @click="onClickImage(meta.url)">
-          <van-image
-              :src="meta.url"
-          >
-            <template v-slot:loading>
-              <van-loading type="spinner" size="20"/>
-            </template>
-            <template v-slot:error>图片加载失败</template>
-          </van-image>
-          <br/>
-          <br/>
-        </div>
-        <div v-if="meta.type==='text'" class="text-2xl">
-          {{ meta.text }}
-          <br/>
-          <br/>
-        </div>
-        <div v-if="meta.type==='video'">
-          <video controls width="300" height="100">
-            <source :src="meta.url" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+      <!--    帖子内容的部分-->
+      <div style="margin: 5vw">
+        <div v-for="meta in JSON.parse(item.contentJson) as PostMeta[]">
+          <div v-if="meta.type==='image'" @click="onClickImage(meta.url)">
+            <van-image
+                :src="meta.url"
+            >
+              <template v-slot:loading>
+                <van-loading type="spinner" size="20"/>
+              </template>
+              <template v-slot:error>图片加载失败</template>
+            </van-image>
+          </div>
+          <div v-if="meta.type==='text'" class="text-2xl">
+            {{ meta.text }}
+          </div>
+          <div v-if="meta.type==='video'">
+            <video controls width="300" height="100">
+              <source :src="meta.url" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
         </div>
 
       </div>
+      <van-row style="margin: 5vw;">
 
+        <van-col span="16"></van-col>
+
+        <van-col span="4">
+          <Icon @click="starManager.onStar()" size="6vw">
+            <HeartOutline v-if="!userStore.checkIfUpvote(item.id)"/>
+            <Heart v-else style="color: red"/>
+          </Icon>
+          {{ item.upvoteCount }}
+        </van-col>
+
+        <van-col span="4" class="text-right text-1xl">
+
+          <van-popover v-model:show="showPopover" placement="bottom-end">
+
+            <CommentCreator :post-id="item.id" @on-success="onCommentSuccess"/>
+
+            <template #reference>
+              <!--            点这个评论-->
+              <!--            reference内部所有元素都是触发popover的元素-->
+              <Icon size="6vw" color="#bc6c25">
+                <Comment/>
+              </Icon>
+              {{ item.commentCount }}
+            </template>
+          </van-popover>
+
+        </van-col>
+      </van-row>
     </div>
-    <p></p>
-    <van-row style="margin: 5vw;">
-
-      <van-col span="16"></van-col>
-
-      <van-col span="4">
-        <Icon @click="starManager.onStar()" size="6vw">
-          <HeartOutline v-if="!userStore.checkIfUpvote(item.id)"/>
-          <Heart v-else style="color: red"/>
-        </Icon>
-        {{ item.upvoteCount }}
-      </van-col>
-
-      <van-col span="4" class="text-right text-1xl">
-
-        <van-popover v-model:show="showPopover" placement="bottom-end">
-
-          <CommentCreator :post-id="item.id"/>
-
-          <template #reference>
-            <!--            点这个评论-->
-            <!--            reference内部所有元素都是触发popover的元素-->
-            <Icon size="6vw" color="#bc6c25">
-              <Comment/>
-            </Icon>
-            {{ item.commentCount }}
-          </template>
-        </van-popover>
-
-      </van-col>
-    </van-row>
-  </div>
 
 
-  <!--  评论部分-->
+    <!--  评论部分-->
 
-  <!--  {{ postItem }}-->
+    <!--  {{ postItem }}-->
 
 
     <van-list
@@ -252,7 +253,7 @@ const onClickImage = (url: string) => {
                       title="确定要删除此评论?"
                       @cancel=""
                   >
-<!--                    @confirm="onDelete(item.id,item.postId,item.authorName)"-->
+                    <!--                    @confirm="onDelete(item.id,item.postId,item.authorName)"-->
 
                     <template #reference>
                       <el-button :type="'warning'" :icon="Delete" size="small"

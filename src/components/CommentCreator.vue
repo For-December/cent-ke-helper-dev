@@ -23,7 +23,7 @@ const onSubmitComment = () => {
 
   isCommentCreating.value = true
   console.log(postId.value)
-  emits('onSuccess')
+
   webCreateComment(postId.value, message.value)
       .then(() => {
         ElMessage.warning('评论成功')
