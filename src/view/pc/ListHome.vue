@@ -15,7 +15,7 @@ import HelperPage from "@/view/HelperPage.vue";
           content-style="padding-right: 10px;"
           bordered
       >
-        <el-scrollbar height="90vh" :noresize="true">
+        <el-scrollbar height="95vh" :noresize="true">
           <HelperPage/>
         </el-scrollbar>
       </n-layout-sider>

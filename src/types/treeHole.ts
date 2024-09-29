@@ -35,3 +35,12 @@ export class PostRecord {
         this.updatedAt = updatedAt;
     }
 }
+
+
+export interface CreatePostParam {
+    authorId: number;
+    authorName: string,
+    text: string;
+    images: File[];
+    tags: string;
+}

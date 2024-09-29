@@ -3,13 +3,14 @@ import {ref} from 'vue';
 import {ElMessage} from "element-plus";
 import {PictureFilled} from "@element-plus/icons-vue";
 import {UploaderFileListItem} from "vant/lib/uploader/types";
+import {webCreatePost} from "@/api/posts.ts";
+import {showWarningMsg} from "@/utils/globalFunc.ts";
 
 const showPopover = ref(false);
 const postContext = ref("");
 
 
 const isPostCreating = ref(false)
-
 
 
 // 文件相关
@@ -52,6 +53,27 @@ const onBeforeDelete = (file: any): boolean => {
   return true
 }
 
+const onCreatePost = () => {
+  isPostCreating.value = true;
+  console.log(fileList.value)
+  let files: File[] = fileList.value.map(t => t?.file!);
+  webCreatePost({
+    authorId: 1,
+    authorName: "Jack",
+    text: postContext.value,
+    images: files,
+    tags: "test"
+  }).then(
+      () => {
+        showWarningMsg("发布成功")
+        message.value = ''
+        files.length = 0
+        isUploading.value = false
+      }
+  ).finally(() => {
+    isPostCreating.value = false
+  })
+}
 </script>
 
 <template>
@@ -106,7 +128,9 @@ const onBeforeDelete = (file: any): boolean => {
         </van-popover>
 
 
-        <el-button type="warning" style="float: right" :loading="isPostCreating">
+        <el-button type="warning" style="float: right" :loading="isPostCreating"
+                   @click="onCreatePost"
+        >
           发布
         </el-button>
       </div>
