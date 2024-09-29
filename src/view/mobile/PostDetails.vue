@@ -122,6 +122,7 @@ const onClickImage = (url: string) => {
 </script>
 
 <template>
+  <van-pull-refresh v-model="loadComments.refreshing" @refresh="onRefresh" success-text="好好好！">
 
   <!--  帖子内容部分-->
   <div>
@@ -208,7 +209,6 @@ const onClickImage = (url: string) => {
 
   <!--  {{ postItem }}-->
 
-  <van-pull-refresh v-model="loadComments.refreshing" @refresh="onRefresh" success-text="好好好！">
 
     <van-list
         v-model:loading="loadComments.loading"

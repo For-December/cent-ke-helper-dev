@@ -85,7 +85,7 @@ const onClickDetails = (post: PostRecord) => {
       close-icon="close"
       position="bottom"
       round
-      :style="{ height: '60%' }"
+      :style="{ height: '75%' }"
   >
     <div class="p-5">
       <PostDetails v-model="detailsModel.postItem" ref="postDetailsRef"/>
