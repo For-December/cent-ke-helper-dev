@@ -2,7 +2,7 @@
 
 import CourseCard from "@/components/helper/CourseCard.vue";
 import {computed, onMounted, ref} from "vue";
-import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
+import {GlobalTeachInfosObj} from "@/store/custom/teachInfosObj.ts";
 
 const emits = defineProps(['curDepartment', 'curBuilding'])
 

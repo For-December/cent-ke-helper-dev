@@ -12,6 +12,7 @@
     "@element-plus/icons-vue": "^2.3.1",
     "@types/node": "^22.7.0",
     "@vicons/ionicons5": "^0.12.0",
+    "@vicons/utils": "^0.1.4",
     "axios": "^1.7.7",
     "bootstrap-icons": "^1.11.3",
     "element-plus": "^2.8.3",

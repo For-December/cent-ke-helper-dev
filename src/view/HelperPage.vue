@@ -2,9 +2,9 @@
 
 import HelperCollapse from "@/components/helper/HelperCollapse.vue";
 import {watch} from "vue";
-import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
-import {GlobalCacheObj} from "../store/cacheObj.ts";
-import {validData} from "@/store/globalData.ts";
+import {GlobalTeachInfosObj} from "@/store/custom/teachInfosObj.ts";
+import {GlobalCacheObj} from "../store/custom/cacheObj.ts";
+import {validData} from "@/store/custom/globalData.ts";
 
 GlobalCacheObj.loadData()
 watch(validData, (newValue) => {

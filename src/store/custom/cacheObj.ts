@@ -1,8 +1,8 @@
 import {computed, Ref, ref} from "vue";
 import {webGetCurTime} from "@/api/req.ts";
 import {curTimeCacheKey, teachInfosCacheKey} from "@/api/globalConst.ts";
-import {GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
-import {validData} from "@/store/globalData.ts";
+import {GlobalTeachInfosObj} from "@/store/custom/teachInfosObj.ts";
+import {validData} from "@/store/custom/globalData.ts";
 
 
 export const GlobalCacheObj = (() => {

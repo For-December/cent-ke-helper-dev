@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {computed, onMounted, ref} from "vue";
-import {globalDepartments, GlobalTeachInfosObj} from "@/store/teachInfosObj.ts";
+import {globalDepartments, GlobalTeachInfosObj} from "@/store/custom/teachInfosObj.ts";
 import CourseCard from "@/components/helper/CourseCard.vue";
 import {Items} from "@/types/Items";
 
