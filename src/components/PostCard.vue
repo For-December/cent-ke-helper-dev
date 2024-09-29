@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {getTimeGap} from "../utils/globalFunc.ts";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, Ref} from "vue";
 import DeleteButton from "@/components/DeleteButton.vue";
 import {PostMeta, PostRecord} from "@/types/treeHole.ts";
 
@@ -11,32 +11,32 @@ const goPostDetail = (post: PostRecord) => {
   emits('clickDetails', post)
 }
 
-const item_t = ref<PostRecord>({
-  authorId: 0, commentCount: 0, content: [], createdAt: new Date(), title: "", updatedAt: new Date(),
-  id: 1,
-  authorName: "芝士雪豹",
-  latestRepliedAt: new Date("2021-10-10 10:10:10"),
-  upvoteCount: 10,
-  contentJson: JSON.stringify([
-    {
-      type: "text",
-      text: "我是帖子的内容，没想到吧！！"
-    },
-    {
-      type: "image",
-      url: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-    },
-    {
-      type: "video",
-      url: "https://www.runoob.com/try/demo_source/movie.mp4"
-    }
-  ])
-})
+// const item_t = ref<PostRecord>({
+//   authorId: 0, commentCount: 0, content: [], createdAt: new Date(), title: "", updatedAt: new Date(),
+//   id: 1,
+//   authorName: "芝士雪豹",
+//   latestRepliedAt: new Date("2021-10-10 10:10:10"),
+//   upvoteCount: 10,
+//   contentJson: JSON.stringify([
+//     {
+//       type: "text",
+//       text: "我是帖子的内容，没想到吧！！"
+//     },
+//     {
+//       type: "image",
+//       url: "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+//     },
+//     {
+//       type: "video",
+//       url: "https://www.runoob.com/try/demo_source/movie.mp4"
+//     }
+//   ])
+// })
 
 const postItem = defineModel()
 
-const item = computed(() => {
-  return postItem.value
+const item:Ref<PostRecord> = computed(() => {
+  return postItem.value as PostRecord
 })
 onMounted(() => {
   // console.log(postItem.value)

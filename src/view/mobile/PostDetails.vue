@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {getTimeGap} from "@/utils/globalFunc.ts";
-import {computed, onMounted, onUpdated, ref, Ref, watch} from "vue";
+import {computed, onMounted, ref, Ref} from "vue";
 import {CommentRecord, PostMeta, PostRecord} from "@/types/treeHole.ts";
 import {Icon} from "@vicons/utils";
 import HeartOutline from "@vicons/ionicons5/HeartOutline"
@@ -10,19 +10,18 @@ import {useUserStore} from "@/store/modules/userStore.ts";
 import {Comment, Delete, InfoFilled} from "@element-plus/icons-vue";
 import {ListModel} from "@/types/listModel.ts";
 import {webGetComments} from "@/api/comments.ts";
-import PostCreator from "@/components/PostCreator.vue";
 import CommentCreator from "@/components/CommentCreator.vue";
 
 const postItem = defineModel()
 const item: Ref<PostRecord> = computed(() => {
   // 每次切换帖子时，重新加载评论
   reloadList()
-  return postItem.value
+  return postItem.value as PostRecord
 })
 
 const userStore = useUserStore()
 const starManager = (() => {
-  const starTimer = ref(null);
+  const starTimer = ref();
 
   const onStar = () => {
 
@@ -58,17 +57,18 @@ const loadComments = ref({
   finished: false,
   refreshing: false
 })
-
-const comments = ref<CommentRecord[]>([
-  {
-    authorId: 0,
-    authorName: "芝士雪豹",
-    content: "我是评论的内容，没想到吧！！",
-    id: 1,
-    modifyTime: new Date(),
-    postId: 1
-  }
-])
+//
+// const comments = ref<CommentRecord[]>([
+//   {
+//     floorNum:1,
+//     authorId: 0,
+//     authorName: "芝士雪豹",
+//     content: "我是评论的内容，没想到吧！！",
+//     id: 1,
+//     createdAt: new Date(),
+//     postId: 1
+//   }
+// ])
 
 const commentItems = computed(() => {
   return commentItemsListModel.listModelData.value
@@ -115,6 +115,10 @@ onMounted(() => {
 })
 
 const showPopover = ref(false)
+
+const onClickImage = (url: string) => {
+  console.log(url)
+}
 </script>
 
 <template>
@@ -183,7 +187,7 @@ const showPopover = ref(false)
 
         <van-popover v-model:show="showPopover" placement="bottom-end">
 
-          <CommentCreator/>
+          <CommentCreator :post-id="item.id"/>
 
           <template #reference>
             <!--            点这个评论-->
@@ -246,9 +250,10 @@ const showPopover = ref(false)
                       :icon="InfoFilled"
                       icon-color="#626AEF"
                       title="确定要删除此评论?"
-                      @confirm="onDelete(item.id,item.postId,item.authorName)"
                       @cancel=""
                   >
+<!--                    @confirm="onDelete(item.id,item.postId,item.authorName)"-->
+
                     <template #reference>
                       <el-button :type="'warning'" :icon="Delete" size="small"
                                  circle
@@ -260,7 +265,7 @@ const showPopover = ref(false)
             </el-row>
 
             <div class="text-gray-400">
-              {{ getTimeGap(new Date(), new Date(item.modifyTime)) }}
+              {{ getTimeGap(new Date(), new Date(item.createdAt)) }}
             </div>
 
             {{ item.content }}

@@ -16,3 +16,14 @@ export const webGetComments = (
         }
     });
 };
+
+export const webCreateComment = (id: number, content: string)
+    : Promise<TransDef> => {
+    return request({
+        method: "post",
+        url: apiPrefix + "/post/" + id + "/comments",
+        data: {
+            content
+        }
+    });
+};
