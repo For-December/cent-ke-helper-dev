@@ -1,13 +1,15 @@
 <script setup lang="ts">
 
 import {getTimeGap} from "@/utils/globalFunc.ts";
-import {computed, ref, Ref} from "vue";
+import {computed, onUpdated, ref, Ref} from "vue";
 import {CommentRecord, PostMeta, PostRecord} from "@/types/treeHole.ts";
 import {Icon} from "@vicons/utils";
 import HeartOutline from "@vicons/ionicons5/HeartOutline"
 import Heart from "@vicons/ionicons5/Heart"
 import {useUserStore} from "@/store/modules/userStore.ts";
 import {Comment, Delete, InfoFilled} from "@element-plus/icons-vue";
+import {ListModel} from "@/types/listModel.ts";
+import {webGetComments} from "@/api/comments.ts";
 
 const postItem = defineModel()
 const item: Ref<PostRecord> = computed(() => {
@@ -64,16 +66,43 @@ const comments = ref<CommentRecord[]>([
   }
 ])
 
+const commentItems = computed(() => {
+  return commentItemsListModel.listModelData.value
+})
+
+const reloadList = () => {
+  commentItemsListModel.listInit()
+  loadComments.finished = false;
+}
 
 const onRefresh = () => {
   setTimeout(() => {
-    // showToast('刷新成功');
-    // ElMessage.success("刷新成功！")
+    commentItemsListModel.listInit()
     loadComments.value.refreshing = false;
     loadComments.value.finished = false;
     // onLoad();
   }, 1000);
 }
+
+const commentItemsListModel = new ListModel<CommentRecord>()
+
+const onLoad = () => {
+  commentItemsListModel.appendListModels(webGetComments(
+          commentItemsListModel.nextPage.value,
+          15,
+          item.value.id),
+      (comment) => {
+        comment.createdAt = new Date(comment.createdAt)
+      })
+      .then((isFinished: boolean) => {
+        if (isFinished) {
+          loadComments.value.finished = true;
+        }
+
+        loadComments.value.loading = false;
+      })
+}
+
 </script>
 
 <template>
@@ -159,6 +188,7 @@ const onRefresh = () => {
         :finished="loadComments.finished"
         finished-text="没有更多了"
         @load="onLoad"
+        class="min-h-[40vh]"
     >
       <van-divider
           :style="{ color: '#bc6c25', borderColor: '#bc6c25', padding: '0 16px' }"
@@ -166,7 +196,7 @@ const onRefresh = () => {
         评论区👇（下拉刷新）
       </van-divider>
 
-      <div v-for="item in comments" :key="item.id">
+      <div v-for="item in commentItems" :key="item.id">
         <el-container>
           <el-aside width="12vw">
             <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"

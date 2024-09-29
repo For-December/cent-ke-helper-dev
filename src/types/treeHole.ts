@@ -52,4 +52,5 @@ export interface CommentRecord {
     authorName: string;
     content: string;
     floorNum: number;
+    createdAt: Date;
 }

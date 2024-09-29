@@ -2,11 +2,19 @@ import {request, TransDef} from "@/api/myAxois.ts";
 import {apiPrefix} from "@/api/globalConst.ts";
 import {CreatePostParam} from "@/types/treeHole.ts";
 
-export const webGetPosts = ()
+export const webGetPosts = (
+    page: number,
+    pageSize: number,
+    searchValue: string = "")
     : Promise<TransDef> => {
     return request({
         method: 'get',
         url: apiPrefix + '/posts',
+        params: {
+            page,
+            pageSize,
+            searchValue
+        }
     })
 };
 

@@ -43,7 +43,10 @@ onMounted(() => {
 })
 
 const onLoad = () => {
-  postItemsListModel.appendListModels(webGetPosts(),
+  postItemsListModel.appendListModels(webGetPosts(
+      postItemsListModel.nextPage.value,
+      15,
+      ""),
       (item) => {
         item.createdAt = new Date(item.createdAt)
         item.updatedAt = new Date(item.updatedAt)
