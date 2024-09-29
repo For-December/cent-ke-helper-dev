@@ -1,15 +1,17 @@
 <script setup lang="ts">
 
 import {getTimeGap} from "../utils/globalFunc.ts";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import DeleteButton from "@/components/DeleteButton.vue";
 import {PostMeta, PostRecord} from "@/types/treeHole.ts";
 
-const goPostDetail = (id: number) => {
-  console.log(id)
+const emits = defineEmits(['clickDetails'])
+const goPostDetail = (post: PostRecord) => {
+  console.log(post)
+  emits('clickDetails', post)
 }
 
-const item = ref<PostRecord>({
+const item_t = ref<PostRecord>({
   authorId: 0, commentCount: 0, content: [], createdAt: new Date(), title: "", updatedAt: new Date(),
   id: 1,
   authorName: "芝士雪豹",
@@ -31,11 +33,14 @@ const item = ref<PostRecord>({
   ])
 })
 
-const props = defineProps<{
-  postItem: PostRecord
-}>()
+const postItem = defineModel()
+
+const item = computed(()=>{
+  return postItem.value
+})
 onMounted(() => {
-  item.value = props.postItem
+  // console.log(postItem.value)
+  // item.value = postItem.value
   // console.log(props.postItem)
   // console.log(item.value)
 })
@@ -53,7 +58,7 @@ onMounted(() => {
     </el-aside>
     <el-main class="pt-0">
       <el-row>
-        <el-col :span="18" @click="goPostDetail(item.id)">
+        <el-col :span="18" @click="goPostDetail(item)">
           <div class="text-[5vw] text-amber-500">
           {{ item.authorName }}
           </div>
@@ -70,7 +75,7 @@ onMounted(() => {
         {{ getTimeGap(new Date(), item.latestRepliedAt) }}
       </p>
 
-      <div class="mt-1 mb-4">
+      <div class="mt-1 mb-4" @click="goPostDetail(item)">
         <div v-for="meta in JSON.parse(item.contentJson) as PostMeta[]">
           <div v-if="meta.type==='image'">
             <van-image
@@ -95,7 +100,6 @@ onMounted(() => {
 
 
         </div>
-
       </div>
 
 

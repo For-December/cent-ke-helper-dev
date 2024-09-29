@@ -5,6 +5,7 @@ import {webGetPosts} from "@/api/posts.ts";
 import PostCard from "@/components/PostCard.vue";
 import {ListModel} from "@/types/listModel.ts";
 import {PostRecord} from "@/types/treeHole.ts";
+import PostDetails from "@/view/mobile/PostDetails.vue";
 
 
 const loadPosts = reactive({
@@ -58,9 +59,31 @@ const onLoad = () => {
 }
 
 
+const detailsModel = reactive({
+  postItem: {} as PostRecord,
+  show: false,
+})
+const onClickDetails = (post: PostRecord) => {
+  console.log(post)
+  detailsModel.postItem = post
+  detailsModel.show = true
+}
+
 </script>
 
 <template>
+  <van-popup
+      v-model:show="detailsModel.show"
+      closeable
+      close-icon="close"
+      position="bottom"
+      round
+      :style="{ height: '60%' }"
+  >
+    <div class="p-5">
+      <PostDetails v-model="detailsModel.postItem"/>
+    </div>
+  </van-popup>
   <van-pull-refresh v-model="loadPosts.refreshing" @refresh="onRefresh" success-text="好好好！">
 
     <PostCreator @on-success="reloadList()"/>
@@ -77,8 +100,8 @@ const onLoad = () => {
         class="min-h-[70vh]"
     >
       <!--      这里如果是 postItemsListModel.listModelData.value 必须 .value-->
-      <div v-for="postItem in postItems" :key="postItem.id">
-        <PostCard :post-item="postItem"/>
+      <div v-for="(_,idx) in postItems" :key="idx">
+        <PostCard v-model="postItems[idx]" @click-details="onClickDetails"/>
       </div>
 
     </van-list>
