@@ -148,7 +148,7 @@ onMounted(() => {
           <br/>
           <br/>
         </div>
-        <div v-if="meta.type==='text'">
+        <div v-if="meta.type==='text'" class="text-2xl">
           {{ meta.text }}
           <br/>
           <br/>
@@ -249,7 +249,7 @@ onMounted(() => {
               {{ getTimeGap(new Date(), new Date(item.modifyTime)) }}
             </div>
 
-            {{ item.content }}
+              {{ item.content }}
           </el-main>
         </el-container>
 
