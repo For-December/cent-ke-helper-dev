@@ -13,10 +13,12 @@ import {webGetComments} from "@/api/comments.ts";
 import CommentCreator from "@/components/CommentCreator.vue";
 
 const curPosition = ref(0);
-const images = computed(()=>{
-  const metas  = JSON.parse(item.value.contentJson) as PostMeta[]
+const images = computed(() => {
+  const metas = JSON.parse(item.value.contentJson) as PostMeta[]
+
+  console.log(metas)
   return metas.filter(meta => meta.type === 'image')
-    .map(meta => meta.url)
+      .map(meta => meta.url)
 })
 const showPreview = ref(false)
 const onClickImage = (url: string) => {
