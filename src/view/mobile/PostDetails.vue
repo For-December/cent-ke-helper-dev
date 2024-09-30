@@ -12,6 +12,18 @@ import {ListModel} from "@/types/listModel.ts";
 import {webGetComments} from "@/api/comments.ts";
 import CommentCreator from "@/components/CommentCreator.vue";
 
+const curPosition = ref(0);
+const images = computed(()=>{
+  const metas  = JSON.parse(item.value.contentJson) as PostMeta[]
+  return metas.filter(meta => meta.type === 'image')
+    .map(meta => meta.url)
+})
+const showPreview = ref(false)
+const onClickImage = (url: string) => {
+  curPosition.value = images.value.indexOf(url);
+  showPreview.value = true
+}
+
 const postItem = defineModel()
 const item: Ref<PostRecord> = computed(() => {
   // 每次切换帖子时，重新加载评论
@@ -116,9 +128,6 @@ onMounted(() => {
 
 const showPopover = ref(false)
 
-const onClickImage = (url: string) => {
-  console.log(url)
-}
 
 const onCommentSuccess = () => {
   // 评论数增加
@@ -227,6 +236,14 @@ const onCommentSuccess = () => {
       <div v-for="_ in 10">
         <van-skeleton title avatar :row="5" :loading="loadComments.loading"/>
       </div>
+
+      <van-image-preview closeable v-model:show="showPreview"
+                         :images="images"
+                         :start-position="curPosition">
+        <!--                           @change="onChange"-->
+
+        <!--          <template v-slot:index>第{{ index + 1 }}页</template>-->
+      </van-image-preview>
 
       <div v-for="item in commentItems" :key="item.id">
         <el-container>

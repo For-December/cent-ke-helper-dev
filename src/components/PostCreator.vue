@@ -98,7 +98,7 @@ const onCreatePost = () => {
         <van-popover v-model:show="showPopover" placement="bottom-start">
           <div>
             <div class="p-1.5">
-              请选择图片
+              请选择图片（最多五张）
             </div>
             <div class="pl-1.5">
               <!-- 上传组件 -->
@@ -106,6 +106,7 @@ const onCreatePost = () => {
                   v-model="fileList"
                   accept="image/*"
                   multiple
+                  :max-count="5"
                   :before-read="onBeforeRead"
                   :after-read="onAfterRead"
                   :before-delete="onBeforeDelete"

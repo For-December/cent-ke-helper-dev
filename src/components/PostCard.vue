@@ -71,7 +71,7 @@ onMounted(() => {
       </el-row>
 
       <!--              <p style="margin: 0;font-size: 15px">2 分钟前</p>-->
-      <p class="text-[3vw] text-gray-500">
+      <p class="text-[3vw] text-gray-500" @click="goPostDetail(item)">
         {{ getTimeGap(new Date(), item.latestRepliedAt) }}
       </p>
 
@@ -102,7 +102,7 @@ onMounted(() => {
         </div>
       </div>
 
-      <van-row>
+      <van-row @click="goPostDetail(item)">
         <van-col span="6" style="text-align: left">
 
         </van-col>
