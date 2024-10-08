@@ -34,3 +34,11 @@ export const webCreatePost = (data: CreatePostParam)
         data: formData,
     });
 };
+
+export const webDeletePost = (id: number)
+    : Promise<TransDef> => {
+    return request({
+        method: 'delete',
+        url: apiPrefix + '/posts/' + id,
+    })
+};

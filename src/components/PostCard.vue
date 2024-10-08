@@ -4,8 +4,10 @@ import {getTimeGap} from "../utils/globalFunc.ts";
 import {computed, onMounted, Ref} from "vue";
 import DeleteButton from "@/components/DeleteButton.vue";
 import {PostMeta, PostRecord} from "@/types/treeHole.ts";
+import {webDeletePost} from "@/api/posts.ts";
+import {ElMessage} from "element-plus";
 
-const emits = defineEmits(['clickDetails'])
+const emits = defineEmits(['clickDetails','deleteSuccess'])
 const goPostDetail = (post: PostRecord) => {
   console.log(post)
   emits('clickDetails', post)
@@ -45,6 +47,14 @@ onMounted(() => {
   // console.log(item.value)
 })
 
+const onDelete = ()=>{
+  webDeletePost(item.value.id).then(()=>{
+    ElMessage.success('贴子删除成功')
+    // 删除成功后，触发父组件的刷新
+    emits('deleteSuccess')
+  })
+}
+
 
 </script>
 
@@ -65,7 +75,9 @@ onMounted(() => {
         </el-col>
         <el-col :span="6">
           <div class="float-right">
-            <DeleteButton/>
+            <DeleteButton
+                v-if="item.authorId == 1"
+                @on-confirm="onDelete"/>
           </div>
         </el-col>
       </el-row>

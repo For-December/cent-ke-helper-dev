@@ -75,6 +75,9 @@ const onClickDetails = (post: PostRecord) => {
   detailsModel.show = true
 }
 
+const onDeleteSuccess = () => {
+  reloadList()
+}
 
 </script>
 
@@ -108,7 +111,7 @@ const onClickDetails = (post: PostRecord) => {
     >
       <!--      这里如果是 postItemsListModel.listModelData.value 必须 .value-->
       <div v-for="(_,idx) in postItems" :key="idx">
-        <PostCard v-model="postItems[idx]" @click-details="onClickDetails"/>
+        <PostCard v-model="postItems[idx]" @click-details="onClickDetails" @delete-success="onDeleteSuccess"/>
       </div>
 
     </van-list>

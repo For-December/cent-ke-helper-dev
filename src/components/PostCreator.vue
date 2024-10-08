@@ -1,14 +1,42 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {computed, ref} from 'vue';
 import {ElMessage} from "element-plus";
-import {PictureFilled} from "@element-plus/icons-vue";
+import {PictureFilled, UserFilled} from "@element-plus/icons-vue";
 import {UploaderFileListItem} from "vant/lib/uploader/types";
 import {webCreatePost} from "@/api/posts.ts";
 import {showWarningMsg} from "@/utils/globalFunc.ts";
+import {PopoverAction} from "vant";
 
 const emits = defineEmits(['onSuccess'])
 
-const showPopover = ref(false);
+const showImagePopover = ref(false);
+
+const showUserPopover = ref(false);
+const userImageError = ref(false);
+const curUserIdx = ref(1);
+const changeUserActions: PopoverAction[] = [
+  {
+    text: '选择身份👇',
+    disabled: true
+  },
+  {
+    text: '匿名用户',
+    icon: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+    color: '#1989fa'
+  }
+];
+const curUserImgSrc = computed(() => {
+  return changeUserActions[curUserIdx.value].icon
+})
+const onSelectUserImage = (action: PopoverAction, index: number) => {
+  changeUserActions.forEach(t => t.disabled ? 1 : t.color = '#000000')
+  action.color = '#1989fa'
+  curUserIdx.value = index;
+
+  userImageError.value = !changeUserActions[curUserIdx.value].icon;
+  console.log(userImageError.value)
+}
+
 const postContext = ref("");
 
 
@@ -95,7 +123,31 @@ const onCreatePost = () => {
       />
       <div class="pt-2">
 
-        <van-popover v-model:show="showPopover" placement="bottom-start">
+        <span class="mr-2">
+                 <van-popover v-model:show="showUserPopover"
+                              placement="bottom-start"
+                              :actions="changeUserActions"
+                              @select="onSelectUserImage">
+          <template #reference>
+
+            <el-button
+                v-if="!userImageError"
+                type="warning" circle>
+               <el-avatar
+                   size="small"
+                   :src="curUserImgSrc"
+               />
+            </el-button>
+            <el-button
+                v-else
+                type="warning"
+                :icon="UserFilled" circle/>
+          </template>
+        </van-popover>
+        </span>
+
+        <span>
+          <van-popover v-model:show="showImagePopover" placement="bottom-start">
           <div>
             <div class="p-1.5">
               请选择图片（最多五张）
@@ -116,20 +168,21 @@ const onCreatePost = () => {
           </div>
 
 
-          <!-- 预览图展示 -->
-          <!--    <van-image-->
-          <!--        v-for="(item, index) in fileList"-->
-          <!--        :key="index"-->
-          <!--        :src="item.url"-->
-          <!--        :preview-src-list="fileList.map(file => file.url)"-->
-          <!--        @click="onPreviewClick(index)"-->
-          <!--    />-->
-          <!--    <van-uploader v-model="fileList" multiple />-->
+            <!-- 预览图展示 -->
+            <!--    <van-image-->
+            <!--        v-for="(item, index) in fileList"-->
+            <!--        :key="index"-->
+            <!--        :src="item.url"-->
+            <!--        :preview-src-list="fileList.map(file => file.url)"-->
+            <!--        @click="onPreviewClick(index)"-->
+            <!--    />-->
+            <!--    <van-uploader v-model="fileList" multiple />-->
 
           <template #reference>
             <el-button type="warning" :icon="PictureFilled" circle/>
           </template>
         </van-popover>
+        </span>
 
 
         <el-button type="warning" style="float: right" :loading="isPostCreating"
