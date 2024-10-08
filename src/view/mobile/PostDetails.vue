@@ -289,10 +289,10 @@ const onCommentSuccess = () => {
             </div>
           </div>
           <div class="col-span-3 grid-rows-3">
-            <div class="text-1xl text-amber-500">
+            <div class="text-[4vw] text-amber-500">
               {{ commentRecord.authorName }}
             </div>
-            <div class="text-gray-400">
+            <div class="text-[2.5vw] text-gray-400">
               {{ getTimeGap(new Date(), new Date(commentRecord.createdAt)) }}
             </div>
             <div>
