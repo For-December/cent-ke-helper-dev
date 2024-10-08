@@ -247,6 +247,13 @@ const onCommentSuccess = () => {
 
     <!--  {{ postItem }}-->
 
+    <van-image-preview closeable v-model:show="showPreview"
+                       :images="images"
+                       :start-position="curPosition">
+      <!--                           @change="onChange"-->
+
+      <!--          <template v-slot:index>第{{ index + 1 }}页</template>-->
+    </van-image-preview>
 
     <van-list
         v-model:loading="loadComments.loading"
@@ -265,48 +272,42 @@ const onCommentSuccess = () => {
         <van-skeleton title avatar :row="5" :loading="loadComments.loading"/>
       </div>
 
-      <van-image-preview closeable v-model:show="showPreview"
-                         :images="images"
-                         :start-position="curPosition">
-        <!--                           @change="onChange"-->
-
-        <!--          <template v-slot:index>第{{ index + 1 }}页</template>-->
-      </van-image-preview>
 
       <div v-for="commentRecord in commentItems" :key="commentRecord.id">
-        <el-container>
-          <el-aside width="12vw">
-            <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
-                       :src="defaultAvatar"
-            />
-            <el-tag type="warning">
-              {{ commentRecord.floorNum ?? 1 }} 楼
-            </el-tag>
-          </el-aside>
-          <el-main style="padding-top: 0;">
-            <el-row>
-              <el-col :span="12" class="text-1xl text-amber-500">
-                {{ commentRecord.authorName }}
-              </el-col>
-              <el-col :span="12">
-                <div class="float-right">
-                  <DeleteButton
-                      v-if="commentRecord.authorId == 1"
-                      size="small"
-                      @on-confirm="onDelete(commentRecord.id)"
-                  />
-                </div>
-              </el-col>
-            </el-row>
+
+        <div class="grid grid-cols-5 pb-5">
+          <div class="col-span-1 grid-rows-2">
+            <div>
+              <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
+                         :src="defaultAvatar"
+              />
+            </div>
+            <div>
+              <el-tag type="warning">
+                {{ commentRecord.floorNum ?? 1 }} 楼
+              </el-tag>
+            </div>
+          </div>
+          <div class="col-span-3 grid-rows-3">
+            <div class="text-1xl text-amber-500">
+              {{ commentRecord.authorName }}
+            </div>
             <div class="text-gray-400">
               {{ getTimeGap(new Date(), new Date(commentRecord.createdAt)) }}
             </div>
+            <div>
+              {{ commentRecord.content }}
+            </div>
+          </div>
 
-            {{ commentRecord.content }}
-          </el-main>
-        </el-container>
-
-
+          <div class="text-center">
+            <DeleteButton
+                v-if="commentRecord.authorId == 1"
+                size="small"
+                @on-confirm="onDelete(commentRecord.id)"
+            />
+          </div>
+        </div>
       </div>
 
       <van-divider/>
