@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import TreeHole from "@/view/mobile/TreeHole.vue";
+import Profile from "@/view/mobile/Profile.vue";
 
 const pageNum = ref(0)
 </script>
@@ -16,6 +17,7 @@ const pageNum = ref(0)
     </n-tab-pane>
     <n-tab-pane :name="1" tab="个人中心">
       <!--      帖子内容的弹出层-->
+      <Profile/>
 
 <!--      <PostDetails/>-->
 

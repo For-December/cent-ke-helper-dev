@@ -6,6 +6,7 @@ import {UploaderFileListItem} from "vant/lib/uploader/types";
 import {webCreatePost} from "@/api/posts.ts";
 import {showWarningMsg} from "@/utils/globalFunc.ts";
 import {PopoverAction} from "vant";
+import {defaultAvatar} from "@/api/globalConst.ts";
 
 const emits = defineEmits(['onSuccess'])
 
@@ -21,7 +22,7 @@ const changeUserActions: PopoverAction[] = [
   },
   {
     text: '匿名用户',
-    icon: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+    icon: defaultAvatar,
     color: '#1989fa'
   }
 ];
@@ -87,6 +88,13 @@ const onCreatePost = () => {
   isPostCreating.value = true;
   console.log(fileList.value)
   let files: File[] = fileList.value.map(t => t?.file!);
+
+  if (postContext.value === '') {
+    ElMessage.error('内容不能为空')
+    isPostCreating.value = false
+    return
+  }
+
   webCreatePost({
     authorId: 1,
     authorName: "Jack",

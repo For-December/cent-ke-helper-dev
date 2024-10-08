@@ -11,6 +11,7 @@ import {Comment, Delete, InfoFilled} from "@element-plus/icons-vue";
 import {ListModel} from "@/types/listModel.ts";
 import {webGetComments} from "@/api/comments.ts";
 import CommentCreator from "@/components/CommentCreator.vue";
+import {defaultAvatar} from "@/api/globalConst.ts";
 
 const curPosition = ref(0);
 const images = computed(() => {
@@ -149,7 +150,7 @@ const onCommentSuccess = () => {
       <el-row>
         <el-col :span="4">
           <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
-                     src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                     :src="defaultAvatar"
           />
         </el-col>
         <el-col :span="20">
@@ -251,7 +252,7 @@ const onCommentSuccess = () => {
         <el-container>
           <el-aside width="12vw">
             <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
-                       src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                       :src="defaultAvatar"
             />
             <el-tag type="warning">
               {{ item.floorNum ?? 1 }} 楼

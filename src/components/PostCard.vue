@@ -6,6 +6,7 @@ import DeleteButton from "@/components/DeleteButton.vue";
 import {PostMeta, PostRecord} from "@/types/treeHole.ts";
 import {webDeletePost} from "@/api/posts.ts";
 import {ElMessage} from "element-plus";
+import {defaultAvatar} from "@/api/globalConst.ts";
 
 const emits = defineEmits(['clickDetails','deleteSuccess'])
 const goPostDetail = (post: PostRecord) => {
@@ -63,7 +64,7 @@ const onDelete = ()=>{
     <el-aside width="12vw" class="pt-[20px]">
       <!--              <Avatar style="width: 10vw;height: 10vw; margin: 0;border-radius: 50%"></Avatar>-->
       <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
-                 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                 :src="defaultAvatar"
       />
     </el-aside>
     <el-main class="pt-0">
