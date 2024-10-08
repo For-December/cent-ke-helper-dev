@@ -7,13 +7,14 @@ import {Icon} from "@vicons/utils";
 import HeartOutline from "@vicons/ionicons5/HeartOutline"
 import Heart from "@vicons/ionicons5/Heart"
 import {useUserStore} from "@/store/modules/userStore.ts";
-import {Comment, Delete, InfoFilled} from "@element-plus/icons-vue";
+import {Comment} from "@element-plus/icons-vue";
 import {ListModel} from "@/types/listModel.ts";
 import {webDeleteComment, webGetComments} from "@/api/comments.ts";
 import CommentCreator from "@/components/CommentCreator.vue";
 import {defaultAvatar} from "@/api/globalConst.ts";
 import DeleteButton from "@/components/DeleteButton.vue";
 import {ElMessage} from "element-plus";
+import {webUpdateStar} from "@/api/star.ts";
 
 const onDelete = (commentId: number) => {
   webDeleteComment(commentId).then(() => {
@@ -47,6 +48,8 @@ const starManager = (() => {
   const starTimer = ref();
 
   const onStar = () => {
+    // 重置计时器
+    clearTimeout(starTimer.value)
 
     // 已经点赞，取消点赞
     if (userStore.checkIfUpvote(item.value.id)) {
@@ -58,12 +61,24 @@ const starManager = (() => {
       item.value.upvoteCount++;
     }
 
-    // 重置计时器
-    clearTimeout(starTimer.value)
     // 在1秒后执行异步API调用
     starTimer.value = setTimeout(() => {
       console.log("发起点赞请求")
       console.log(userStore.userUpvoteList)
+      webUpdateStar(item.value.id,
+          userStore.userUpvoteList.some(t => t == item.value.id)
+      ).then(() => {
+        console.log('点赞状态修改成功')
+      }).catch(() => {
+        if (userStore.checkIfUpvote(item.value.id)) {
+          userStore.cancelUpvote(item.value.id)
+          item.value.upvoteCount--;
+        } else {
+          userStore.upvote(item.value.id)
+          item.value.upvoteCount++;
+        }
+        console.log('点赞状态修改失败')
+      })
       // postStar(id, curUserId.value, curUser.value, isStar.value).then((status) => {
       //   console.log(status)
       // })

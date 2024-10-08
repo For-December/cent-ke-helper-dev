@@ -1,7 +1,8 @@
 import {ref} from "vue";
 import {defineStore} from "pinia";
-import {User} from "@/types/treeHole.ts";
+import {StarRecord, User} from "@/types/treeHole.ts";
 import {defaultAvatar, defaultUsername} from "@/api/globalConst.ts";
+import {webGetProfileStars} from "@/api/star.ts";
 
 export const useUserStore
     = defineStore('user', () => {
@@ -23,6 +24,16 @@ export const useUserStore
         userUpvoteList.value.push(id)
     }
 
+    function initUpvoteList() {
+        webGetProfileStars().then(r => {
+            const data = r.data as StarRecord[]
+            userUpvoteList.value.length = 0
+            for (let i = 0; i < data.length; i++) {
+                userUpvoteList.value.push(data[i].postId)
+            }
+        })
+    }
+
 
     // 用户信息
     const userInfos = ref<User[]>([{
@@ -33,6 +44,7 @@ export const useUserStore
         ref<User>(userInfos.value[0])
 
     return {
+        initUpvoteList,
         userUpvoteList,
         checkIfUpvote,
         cancelUpvote,

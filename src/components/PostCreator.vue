@@ -7,7 +7,6 @@ import {webCreatePost} from "@/api/posts.ts";
 import {showWarningMsg} from "@/utils/globalFunc.ts";
 import {PopoverAction} from "vant";
 import {defaultAvatar, defaultUsername} from "@/api/globalConst.ts";
-import {useUserStore} from "@/store/modules/userStore.ts";
 
 const emits = defineEmits(['onSuccess'])
 
