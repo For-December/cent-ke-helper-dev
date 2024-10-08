@@ -3,7 +3,7 @@
 import {Delete, InfoFilled} from "@element-plus/icons-vue";
 
 const emits = defineEmits(['onConfirm', 'onCancel'])
-
+const props = defineProps(['size'])
 const onConfirm = ()=>{
   emits('onConfirm')
 }
@@ -24,7 +24,9 @@ const onCancel = ()=>{
       @cancel="onCancel"
   >
     <template #reference>
-      <el-button :type="'warning'" :icon="Delete" size="default"
+      <el-button :type="'warning'"
+                 :icon="Delete"
+                 :size="props.size??'default'"
                  circle
       />
     </template>

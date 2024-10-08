@@ -27,3 +27,14 @@ export const webCreateComment = (id: number, content: string)
         }
     });
 };
+
+export const webDeleteComment = (id: number)
+    : Promise<TransDef> => {
+    return request({
+        method: 'delete',
+        url: apiPrefix + '/comments/' + id,
+    })
+};
+
+
+

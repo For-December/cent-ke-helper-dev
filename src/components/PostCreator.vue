@@ -6,7 +6,8 @@ import {UploaderFileListItem} from "vant/lib/uploader/types";
 import {webCreatePost} from "@/api/posts.ts";
 import {showWarningMsg} from "@/utils/globalFunc.ts";
 import {PopoverAction} from "vant";
-import {defaultAvatar} from "@/api/globalConst.ts";
+import {defaultAvatar, defaultUsername} from "@/api/globalConst.ts";
+import {useUserStore} from "@/store/modules/userStore.ts";
 
 const emits = defineEmits(['onSuccess'])
 
@@ -15,13 +16,14 @@ const showImagePopover = ref(false);
 const showUserPopover = ref(false);
 const userImageError = ref(false);
 const curUserIdx = ref(1);
+
 const changeUserActions: PopoverAction[] = [
   {
     text: '选择身份👇',
     disabled: true
   },
   {
-    text: '匿名用户',
+    text: defaultUsername,
     icon: defaultAvatar,
     color: '#1989fa'
   }

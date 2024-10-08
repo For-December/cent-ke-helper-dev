@@ -9,10 +9,18 @@ import Heart from "@vicons/ionicons5/Heart"
 import {useUserStore} from "@/store/modules/userStore.ts";
 import {Comment, Delete, InfoFilled} from "@element-plus/icons-vue";
 import {ListModel} from "@/types/listModel.ts";
-import {webGetComments} from "@/api/comments.ts";
+import {webDeleteComment, webGetComments} from "@/api/comments.ts";
 import CommentCreator from "@/components/CommentCreator.vue";
 import {defaultAvatar} from "@/api/globalConst.ts";
+import DeleteButton from "@/components/DeleteButton.vue";
+import {ElMessage} from "element-plus";
 
+const onDelete = (commentId: number) => {
+  webDeleteComment(commentId).then(() => {
+    ElMessage.warning('评论删除成功')
+    reloadList()
+  })
+}
 const curPosition = ref(0);
 const images = computed(() => {
   const metas = JSON.parse(item.value.contentJson) as PostMeta[]
@@ -154,7 +162,9 @@ const onCommentSuccess = () => {
           />
         </el-col>
         <el-col :span="20">
-          {{ item.authorName }}<br/>
+          <div class="text-[5vw] text-amber-500">
+            {{ item.authorName }}
+          </div>
           {{ getTimeGap(new Date(), new Date(item.latestRepliedAt)) }}
         </el-col>
       </el-row>
@@ -248,48 +258,36 @@ const onCommentSuccess = () => {
         <!--          <template v-slot:index>第{{ index + 1 }}页</template>-->
       </van-image-preview>
 
-      <div v-for="item in commentItems" :key="item.id">
+      <div v-for="commentRecord in commentItems" :key="commentRecord.id">
         <el-container>
           <el-aside width="12vw">
             <el-avatar size="default" style="width: 12vw;height: 12vw;margin: 0;border-radius: 50%"
                        :src="defaultAvatar"
             />
             <el-tag type="warning">
-              {{ item.floorNum ?? 1 }} 楼
+              {{ commentRecord.floorNum ?? 1 }} 楼
             </el-tag>
           </el-aside>
           <el-main style="padding-top: 0;">
             <el-row>
-              <el-col :span="12">
-                {{ item.authorName }}
+              <el-col :span="12" class="text-1xl text-amber-500">
+                {{ commentRecord.authorName }}
               </el-col>
               <el-col :span="12">
-                <div style="float: right">
-                  <el-popconfirm
-                      confirm-button-text="Yes"
-                      cancel-button-text="No"
-                      :icon="InfoFilled"
-                      icon-color="#626AEF"
-                      title="确定要删除此评论?"
-                      @cancel=""
-                  >
-                    <!--                    @confirm="onDelete(item.id,item.postId,item.authorName)"-->
-
-                    <template #reference>
-                      <el-button :type="'warning'" :icon="Delete" size="small"
-                                 circle
-                      />
-                    </template>
-                  </el-popconfirm>
+                <div class="float-right">
+                  <DeleteButton
+                      v-if="commentRecord.authorId == 1"
+                      size="small"
+                      @on-confirm="onDelete(commentRecord.id)"
+                  />
                 </div>
               </el-col>
             </el-row>
-
             <div class="text-gray-400">
-              {{ getTimeGap(new Date(), new Date(item.createdAt)) }}
+              {{ getTimeGap(new Date(), new Date(commentRecord.createdAt)) }}
             </div>
 
-            {{ item.content }}
+            {{ commentRecord.content }}
           </el-main>
         </el-container>
 
